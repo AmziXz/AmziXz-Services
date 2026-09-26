@@ -1,0 +1,12 @@
+{
+  "name": "amzixz-services-tooling",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local tooling for services.amzixz.id.lv. The site has no build step and ships no dependencies; nothing here is served by GitHub Pages.",
+  "license": "MIT",
+  "scripts": {
+    "start": "node serve.js 8001",
+    "serve": "node serve.js 8001"
+  }
+}
