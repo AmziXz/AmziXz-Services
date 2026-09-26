@@ -1,0 +1,12 @@
+# GitHub Pages builds this repo with Jekyll by default. The only thing this
+# file does is keep working notes and local tooling OFF the public site:
+# without it, README.md and CLAUDE.md are published as pages and
+# package.json / serve.js are served as-is.
+#
+# The HTML has no front matter, so Jekyll copies it through untouched.
+exclude:
+  - README.md
+  - CLAUDE.md
+  - design-system/
+  - package.json
+  - serve.js
