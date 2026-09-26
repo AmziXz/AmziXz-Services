@@ -9,20 +9,25 @@
       content="AmziXz Services builds websites and applications to your brief, at a fixed price agreed before any work starts. You keep the source."
     />
     <link rel="canonical" href="https://services.amzixz.id.lv/" />
-    <link rel="icon" href="/assets/logo-mark-32.png?v=2" sizes="32x32" type="image/png" />
-    <link rel="icon" href="/assets/logo-mark-192.png?v=2" sizes="192x192" type="image/png" />
-    <link rel="apple-touch-icon" href="/assets/logo-mark-192.png?v=2" />
+    <link rel="alternate" hreflang="en" href="https://services.amzixz.id.lv/" />
+    <link rel="alternate" hreflang="lv" href="https://services.amzixz.id.lv/lv/" />
+    <link rel="alternate" hreflang="x-default" href="https://services.amzixz.id.lv/" />
+    <link rel="icon" href="/assets/logo-mark-32.png?v=3" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/assets/logo-mark-192.png?v=3" sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo-mark-192.png?v=3" />
     <meta name="theme-color" content="#11100e" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="AmziXz Services" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:locale:alternate" content="lv_LV" />
     <meta property="og:title" content="AmziXz Services · Websites and applications, made to measure" />
     <meta
       property="og:description"
       content="Websites and applications built to your brief, at a fixed price agreed up front. You keep the source."
     />
     <meta property="og:url" content="https://services.amzixz.id.lv/" />
-    <meta property="og:image" content="https://services.amzixz.id.lv/assets/og-image.jpg?v=2" />
+    <meta property="og:image" content="https://services.amzixz.id.lv/assets/og-image.jpg?v=3" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="AmziXz Services logo, gold on black" />
@@ -32,9 +37,13 @@
     <link rel="preload" href="/assets/fonts/cormorant-italic-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-    <script src="/assets/reveal.js?v=2" defer></script>
-    <script src="/assets/menu.js?v=2" defer></script>
-    <link rel="stylesheet" href="/assets/style.css?v=2" />
+    <!-- Not deferred: sends a returning visitor to the language they chose
+         before anything paints. Reads the hreflang links above. -->
+    <script src="/assets/lang.js?v=3"></script>
+    <script src="/assets/reveal.js?v=3" defer></script>
+    <script src="/assets/menu.js?v=3" defer></script>
+    <script src="/assets/brief.js?v=3" defer></script>
+    <link rel="stylesheet" href="/assets/style.css?v=3" />
     <!-- Without JavaScript the menu button can never open, so show the links. -->
     <noscript>
       <style>
@@ -58,6 +67,8 @@
         "image": "https://services.amzixz.id.lv/assets/og-image.jpg",
         "description": "Website and application development, built to a brief at a fixed price.",
         "email": "amzixz@proton.me",
+        "telephone": "+37129351853",
+        "knowsLanguage": ["en", "lv"],
         "areaServed": "Worldwide",
         "address": { "@type": "PostalAddress", "addressCountry": "LV" },
         "parentOrganization": { "@type": "Organization", "name": "AmziXz", "url": "https://amzixz.id.lv/" },
@@ -75,7 +86,7 @@
     <header class="header">
       <div class="wrap header-inner">
         <a class="brand" href="/">
-          <img src="/assets/logo-mark-192.png?v=2" alt="" width="44" height="44" />
+          <img src="/assets/logo-mark-192.webp?v=3" alt="" width="44" height="44" />
           <span class="brand-text">
             <span class="brand-name">AmziXz</span>
             <span class="brand-sub">Services</span>
@@ -93,6 +104,10 @@
         </nav>
 
         <div class="header-actions">
+          <div class="lang-switch" role="group" aria-label="Language">
+            <a href="/" data-lang="en" lang="en" aria-current="true">EN</a>
+            <a href="/lv/" data-lang="lv" lang="lv">LV</a>
+          </div>
           <a class="btn btn--sm hide-xs" href="#contact">Enquire</a>
           <button
             class="nav-toggle"
@@ -130,7 +145,7 @@
               </div>
             </div>
             <div class="hero-mark" data-reveal>
-              <img src="/assets/logo-mark.png?v=2" alt="" width="512" height="512" />
+              <img src="/assets/logo-mark.webp?v=3" alt="" width="512" height="512" fetchpriority="high" />
             </div>
           </div>
           <ul class="hero-foot" data-reveal>
@@ -227,7 +242,7 @@
             <a class="frame" href="https://amzixz.id.lv/" rel="noopener" data-reveal aria-label="Visit amzixz.id.lv">
               <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>amzixz.id.lv</span></div>
               <img
-                src="/assets/work-amzixz.jpg?v=2"
+                src="/assets/work-amzixz.webp?v=3"
                 alt="The amzixz.id.lv home page in dark mode, headline: Curious about everything. Building most of it."
                 width="1440"
                 height="900"
@@ -261,7 +276,7 @@
                 How a project <em class="gilt">runs.</em>
               </h2>
             </div>
-            <p class="lede" data-reveal>No forms to fill in and no sales call. A message is enough to start.</p>
+            <p class="lede" data-reveal>No sales call and no paperwork. A message is enough to start.</p>
           </div>
 
           <ol class="steps">
@@ -269,8 +284,8 @@
               <span class="step-no" aria-hidden="true">I</span>
               <h3>Conversation</h3>
               <p>
-                Message us on Discord or by email with what you are building, roughly when you need
-                it, and any examples you like.
+                Message us on WhatsApp, Discord or by email with what you are building, roughly
+                when you need it, and any examples you like.
               </p>
             </li>
             <li class="step" data-reveal data-reveal-delay="120">
@@ -395,20 +410,83 @@
         </div>
       </section>
 
-      <!-- Closing call to action -->
+      <!-- Closing call to action: the brief builder (assets/brief.js). -->
       <section class="closing" id="contact" aria-labelledby="contact-title">
         <div class="wrap">
           <p class="label" data-reveal>Enquiries</p>
           <h2 id="contact-title" data-reveal>Tell us what you are <em class="gilt">building.</em></h2>
           <p class="lede" data-reveal>
-            Discord is fastest; email works just as well. Include what you need, when you need it,
-            and anything you already have. A rough idea is enough to quote from.
+            Answer three questions and send it however suits you. A rough idea is enough to quote
+            from.
           </p>
-          <div class="closing-actions" data-reveal>
-            <a class="btn btn--gold" href="https://discord.com/invite/zvb6F7vF" rel="noopener">Message us on Discord</a>
-            <a class="btn" href="mailto:amzixz@proton.me?subject=Project%20enquiry">Email us</a>
-          </div>
-          <p class="closing-mail" data-reveal>or write to amzixz@proton.me</p>
+
+          <form
+            class="brief"
+            id="brief"
+            action="https://wa.me/37129351853"
+            method="get"
+            target="_blank"
+            novalidate
+            data-reveal
+            data-phone="37129351853"
+            data-email="amzixz@proton.me"
+            data-greeting="Hello AmziXz Services,"
+            data-l-kind="Project"
+            data-l-when="Timeline"
+            data-l-name="Name"
+            data-signature="(sent from services.amzixz.id.lv)"
+            data-subject="Project enquiry"
+          >
+            <fieldset>
+              <legend>What do you need?</legend>
+              <div class="chips">
+                <label class="chip"><input type="radio" name="kind" value="Website" checked /><span>Website</span></label>
+                <label class="chip"><input type="radio" name="kind" value="Landing page" /><span>Landing page</span></label>
+                <label class="chip"><input type="radio" name="kind" value="Application" /><span>Application</span></label>
+                <label class="chip"><input type="radio" name="kind" value="Not sure yet" /><span>Not sure yet</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>When do you need it?</legend>
+              <div class="chips">
+                <label class="chip"><input type="radio" name="when" value="As soon as possible" /><span>As soon as possible</span></label>
+                <label class="chip"><input type="radio" name="when" value="Within a month" checked /><span>Within a month</span></label>
+                <label class="chip"><input type="radio" name="when" value="In 1-3 months" /><span>In 1&ndash;3 months</span></label>
+                <label class="chip"><input type="radio" name="when" value="No fixed date" /><span>No fixed date</span></label>
+              </div>
+            </fieldset>
+
+            <div class="brief-field">
+              <label for="brief-name">Your name <span>(optional)</span></label>
+              <input id="brief-name" name="name" type="text" autocomplete="name" />
+            </div>
+
+            <div class="brief-field">
+              <label for="brief-text">Tell us about it</label>
+              <textarea id="brief-text" name="text" rows="4" required aria-describedby="brief-help brief-error"></textarea>
+              <p class="brief-help" id="brief-help">What it is for, what it needs to do, and any sites you like.</p>
+              <p class="brief-error" id="brief-error" role="alert" hidden>Add a sentence or two so we can quote properly.</p>
+            </div>
+
+            <div class="brief-actions">
+              <button class="btn btn--gold" type="submit" data-send="whatsapp">Send on WhatsApp</button>
+              <button
+                class="btn"
+                type="submit"
+                data-send="email"
+                formaction="mailto:amzixz@proton.me"
+                formmethod="post"
+                formenctype="text/plain"
+              >Send by email</button>
+            </div>
+          </form>
+
+          <ul class="direct" data-reveal>
+            <li><a href="https://wa.me/37129351853" rel="noopener"><b>WhatsApp</b> +371 2935 1853</a></li>
+            <li><a href="https://discord.com/invite/zvb6F7vF" rel="noopener"><b>Discord</b> AmziXz server</a></li>
+            <li><a href="mailto:amzixz@proton.me"><b>Email</b> amzixz@proton.me</a></li>
+          </ul>
         </div>
       </section>
     </main>
@@ -418,7 +496,7 @@
         <div class="footer-top">
           <div>
             <a class="brand" href="/">
-              <img src="/assets/logo-mark-192.png?v=2" alt="" width="44" height="44" />
+              <img src="/assets/logo-mark-192.webp?v=3" alt="" width="44" height="44" />
               <span class="brand-text">
                 <span class="brand-name">AmziXz</span>
                 <span class="brand-sub">Services</span>

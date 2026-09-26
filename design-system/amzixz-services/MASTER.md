@@ -109,6 +109,19 @@ held back:
   client testimonials yet, and inventing them is worse than leaving the slot
   out.
 
+## Height, not just width (2026-09-26)
+
+Display sizes use `min()` of a width-based and a height-based value:
+
+```css
+--t-hero: clamp(2.75rem, min(1.3rem + 7vw, 1rem + 10.5vh), 8rem);
+```
+
+Width-only sizing put the hero call to action below the fold on every common
+laptop: 1536x700 (1920x1080 at 125% Windows scaling), 1366x625 and 1280x590.
+It only fit on a 1920x1080 screen at 100%. Test the fold at those sizes, in
+both languages; Latvian runs longer.
+
 ## Anti-patterns for this site
 
 - A second accent colour, or a light theme.
