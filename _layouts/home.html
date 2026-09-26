@@ -1,0 +1,461 @@
+{%- comment -%}
+  The one-page site, in any language. No wording lives here: every visible
+  text comes from _data/lang/<code>.yml, contact details from
+  _data/contact.yml, and the language list from _data/languages.yml.
+
+  Every text goes through `escape`, so a quote or & in a translation can never
+  break the markup. _config.yml turns on strict variables: a key missing from
+  a translation fails the build, and GitHub keeps the previous version live,
+  instead of publishing a blank.
+{%- endcomment -%}
+{%- assign t = site.data.lang[page.lang] -%}
+{%- assign c = site.data.contact -%}
+{%- assign langs = site.data.languages -%}
+{%- for l in langs -%}{%- if l.code == page.lang -%}{%- assign here = l -%}{%- endif -%}{%- endfor -%}
+{%- assign upper = "I.,II.,III.,IV.,V.,VI.,VII.,VIII." | split: "," -%}
+{%- assign lower = "i.,ii.,iii.,iv.,v.,vi.,vii.,viii." | split: "," -%}
+{%- assign plain = "I,II,III,IV,V,VI,VII,VIII" | split: "," -%}
+<!DOCTYPE html>
+<html lang="{{ here.code }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ t.meta.title | escape }}</title>
+    <meta name="description" content="{{ t.meta.description | escape }}" />
+    <link rel="canonical" href="{{ site.origin }}{{ here.path }}" />
+{%- for l in langs %}
+    <link rel="alternate" hreflang="{{ l.code }}" href="{{ site.origin }}{{ l.path }}" />
+{%- endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ site.origin }}{{ langs.first.path }}" />
+    <link rel="icon" href="/assets/logo-mark-32.png?v={{ site.asset_version }}" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/assets/logo-mark-192.png?v={{ site.asset_version }}" sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo-mark-192.png?v={{ site.asset_version }}" />
+    <meta name="theme-color" content="#11100e" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AmziXz Services" />
+    <meta property="og:locale" content="{{ here.locale }}" />
+{%- for l in langs %}{% if l.code != here.code %}
+    <meta property="og:locale:alternate" content="{{ l.locale }}" />
+{%- endif %}{% endfor %}
+    <meta property="og:title" content="{{ t.meta.title | escape }}" />
+    <meta property="og:description" content="{{ t.meta.share_description | escape }}" />
+    <meta property="og:url" content="{{ site.origin }}{{ here.path }}" />
+    <meta property="og:image" content="{{ site.origin }}/assets/og-image.jpg?v={{ site.asset_version }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="{{ t.meta.share_image_alt | escape }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" href="/assets/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/cormorant-italic-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Not deferred: sends a returning visitor to the language they chose
+         before anything paints. Reads the hreflang links above. -->
+    <script src="/assets/lang.js?v={{ site.asset_version }}"></script>
+    <script src="/assets/reveal.js?v={{ site.asset_version }}" defer></script>
+    <script src="/assets/menu.js?v={{ site.asset_version }}" defer></script>
+    <script src="/assets/brief.js?v={{ site.asset_version }}" defer></script>
+    <link rel="stylesheet" href="/assets/style.css?v={{ site.asset_version }}" />
+    <!-- Without JavaScript the menu button can never open, so show the links. -->
+    <noscript>
+      <style>
+        @media (max-width: 56.25rem) {
+          .nav-toggle { display: none !important; }
+          .header-inner { flex-wrap: wrap; }
+          .header-nav { order: 3; width: 100%; }
+          .nav { display: flex !important; position: static !important; flex-direction: row !important; flex-wrap: wrap; gap: 0 1.25rem !important; padding: 0 0 0.5rem !important; border: 0 !important; background: none !important; }
+          .nav a { border: 0 !important; font-size: 1.25rem !important; min-height: 2.75rem !important; }
+        }
+      </style>
+    </noscript>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "AmziXz Services",
+        "url": "{{ site.origin }}{{ here.path }}",
+        "logo": "{{ site.origin }}/assets/logo-mark.png",
+        "image": "{{ site.origin }}/assets/og-image.jpg",
+        "description": {{ t.meta.schema_description | jsonify }},
+        "email": {{ c.email | jsonify }},
+        "telephone": "+{{ c.whatsapp }}",
+        "knowsLanguage": [{% for l in langs %}{{ l.code | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}],
+        "areaServed": "Worldwide",
+        "address": { "@type": "PostalAddress", "addressCountry": "LV" },
+        "parentOrganization": { "@type": "Organization", "name": "AmziXz", "url": {{ t.footer.main_site_url | jsonify }} },
+        "makesOffer": [
+{%- for o in t.meta.schema_offers %}
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": {{ o | jsonify }} } }{% unless forloop.last %},{% endunless %}
+{%- endfor %}
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <a class="skip" href="#main">{{ t.ui.skip | escape }}</a>
+
+    <header class="header">
+      <div class="wrap header-inner">
+        <a class="brand" href="{{ here.path }}">
+          <img src="/assets/logo-mark-192.webp?v={{ site.asset_version }}" alt="" width="44" height="44" />
+          <span class="brand-text">
+            <span class="brand-name">AmziXz</span>
+            <span class="brand-sub">Services</span>
+          </span>
+        </a>
+
+        <nav class="header-nav" aria-label="{{ t.ui.sections | escape }}">
+          <ul class="nav" id="primary-menu">
+            <li><a href="#services">{{ t.nav.services | escape }}</a></li>
+            <li><a href="#work">{{ t.nav.work | escape }}</a></li>
+            <li><a href="#process">{{ t.nav.process | escape }}</a></li>
+            <li><a href="#engagements">{{ t.nav.engagements | escape }}</a></li>
+            <li><a href="#faq">{{ t.nav.faq | escape }}</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <!-- Language menu. A native <details> disclosure: opens and closes with
+               the keyboard and works with JavaScript off. assets/menu.js adds
+               close-on-Escape and close-on-click-outside. -->
+          <details class="lang-menu">
+            <summary aria-label="{{ t.ui.language | escape }}: {{ here.name | escape }}">
+              <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" />
+              </svg>
+              <span aria-hidden="true">{{ here.short }}</span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </summary>
+            <ul class="lang-list" aria-label="{{ t.ui.language | escape }}">
+{%- for l in langs %}
+              <li>
+                <a href="{{ l.path }}" data-lang="{{ l.code }}" lang="{{ l.code }}" hreflang="{{ l.code }}"{% if l.code == here.code %} aria-current="true"{% endif %}>
+                  <span class="lang-name">{{ l.name | escape }}</span>
+                  <span class="lang-code" aria-hidden="true">{{ l.short }}</span>
+                </a>
+              </li>
+{%- endfor %}
+            </ul>
+          </details>
+          <a class="btn btn--sm hide-xs" href="#contact">{{ t.ui.enquire | escape }}</a>
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="primary-menu"
+            aria-label="{{ t.ui.menu | escape }}"
+          >
+            <svg class="bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M4 8h16M4 16h16" />
+            </svg>
+            <svg class="cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="label label--rule" data-reveal>{{ t.hero.label | escape }}</p>
+              <h1 id="hero-title" data-reveal>{{ t.hero.title | escape }} <em class="gilt">{{ t.hero.title_accent | escape }}</em></h1>
+              <p class="lede" data-reveal>{{ t.hero.lede | escape }}</p>
+              <div class="hero-actions" data-reveal>
+                <a class="btn btn--gold" href="#contact">{{ t.hero.cta | escape }}</a>
+                <a class="arrow-link" href="#services">{{ t.hero.secondary | escape }}</a>
+              </div>
+            </div>
+            <div class="hero-mark" data-reveal>
+              <img src="/assets/logo-mark.webp?v={{ site.asset_version }}" alt="" width="512" height="512" fetchpriority="high" />
+            </div>
+          </div>
+          <ul class="hero-foot" data-reveal>
+{%- for f in t.hero.facts %}
+            <li>{{ f | escape }}</li>
+{%- endfor %}
+          </ul>
+        </div>
+      </section>
+
+      <!-- Principles -->
+      <section class="section section--alt" aria-labelledby="standard-title">
+        <div class="wrap">
+          <p class="label label--rule" data-reveal>{{ t.standard.label | escape }}</p>
+          <h2 class="statement" id="standard-title" data-reveal>
+            {{ t.standard.statement_before | escape }} <em class="gilt">{{ t.standard.statement_accent | escape }}</em> {{ t.standard.statement_after | escape }}
+          </h2>
+          <ul class="principles">
+{%- for p in t.standard.principles %}
+            <li class="principle" data-reveal{% if forloop.index0 > 0 %} data-reveal-delay="{{ forloop.index0 | times: 100 }}"{% endif %}>
+              <span class="numeral" aria-hidden="true">{{ upper[forloop.index0] }}</span>
+              <h3>{{ p.title | escape }}</h3>
+              <p>{{ p.text | escape }}</p>
+            </li>
+{%- endfor %}
+          </ul>
+        </div>
+      </section>
+
+      <!-- Services: an editorial index; every row leads to the enquiry. -->
+      <section class="section" id="services" aria-labelledby="services-title">
+        <div class="wrap">
+          <div class="section-head section-head--split">
+            <div>
+              <p class="label label--rule" data-reveal>{{ t.services.label | escape }}</p>
+              <h2 class="section-title" id="services-title" data-reveal>
+                {{ t.services.title | escape }} <em class="gilt">{{ t.services.title_accent | escape }}</em>
+              </h2>
+            </div>
+            <p class="lede" data-reveal>{{ t.services.lede | escape }}</p>
+          </div>
+
+          <div class="index-list">
+{%- for s in t.services.items %}
+            <a class="index-row" href="#contact" data-reveal>
+              <span class="index-no" aria-hidden="true">{{ lower[forloop.index0] }}</span>
+              <h3>{{ s.title | escape }}</h3>
+              <p>{{ s.text | escape }}</p>
+              <span class="index-go" aria-hidden="true">{{ t.services.go | escape }}</span>
+            </a>
+{%- endfor %}
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent work: only what is live and can be checked. -->
+      <section class="section section--alt" id="work" aria-labelledby="work-title">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="label label--rule" data-reveal>{{ t.work.label | escape }}</p>
+            <h2 class="section-title" id="work-title" data-reveal>
+              {{ t.work.title | escape }} <em class="gilt">{{ t.work.title_accent | escape }}</em>
+            </h2>
+          </div>
+
+          <article class="work">
+            <a class="frame" href="{{ t.work.url | escape }}" rel="noopener" data-reveal aria-label="{{ t.work.visit_label | escape }}">
+              <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>{{ t.work.address | escape }}</span></div>
+              <img
+                src="{{ t.work.image | escape }}?v={{ site.asset_version }}"
+                alt="{{ t.work.image_alt | escape }}"
+                width="1440"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <div class="work-body" data-reveal data-reveal-delay="120">
+              <span class="tag">{{ t.work.tag | escape }}</span>
+              <h3>{{ t.work.name | escape }}</h3>
+              <p>{{ t.work.text | escape }}</p>
+              <ul class="facts">
+{%- for f in t.work.facts %}
+                <li><b>{{ f.label | escape }}</b><span>{{ f.value | escape }}</span></li>
+{%- endfor %}
+              </ul>
+              <a class="arrow-link" href="{{ t.work.url | escape }}" rel="noopener">{{ t.work.cta | escape }}</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section class="section" id="process" aria-labelledby="process-title">
+        <div class="wrap">
+          <div class="section-head section-head--split">
+            <div>
+              <p class="label label--rule" data-reveal>{{ t.process.label | escape }}</p>
+              <h2 class="section-title" id="process-title" data-reveal>
+                {{ t.process.title | escape }} <em class="gilt">{{ t.process.title_accent | escape }}</em>
+              </h2>
+            </div>
+            <p class="lede" data-reveal>{{ t.process.lede | escape }}</p>
+          </div>
+
+          <ol class="steps">
+{%- for s in t.process.steps %}
+            <li class="step" data-reveal{% if forloop.index0 > 0 %} data-reveal-delay="{{ forloop.index0 | times: 120 }}"{% endif %}>
+              <span class="step-no" aria-hidden="true">{{ plain[forloop.index0] }}</span>
+              <h3>{{ s.title | escape }}</h3>
+              <p>{{ s.text | escape }}</p>
+            </li>
+{%- endfor %}
+          </ol>
+        </div>
+      </section>
+
+      <!-- Engagements: shapes, not prices. See README "Pricing". -->
+      <section class="section section--alt" id="engagements" aria-labelledby="engagements-title">
+        <div class="wrap">
+          <div class="section-head section-head--split">
+            <div>
+              <p class="label label--rule" data-reveal>{{ t.engagements.label | escape }}</p>
+              <h2 class="section-title" id="engagements-title" data-reveal>
+                {{ t.engagements.title | escape }} <em class="gilt">{{ t.engagements.title_accent | escape }}</em>
+              </h2>
+            </div>
+            <p class="lede" data-reveal>{{ t.engagements.lede | escape }}</p>
+          </div>
+
+          <div class="tiers">
+{%- for tier in t.engagements.tiers %}
+            <article class="tier{% if tier.flag != "" %} tier--featured{% endif %}" data-reveal{% if forloop.index0 > 0 %} data-reveal-delay="{{ forloop.index0 | times: 120 }}"{% endif %}>
+{%- if tier.flag != "" %}
+              <span class="tier-flag">{{ tier.flag | escape }}</span>
+{%- endif %}
+              <h3>{{ tier.name | escape }}</h3>
+              <p class="tier-price">{{ tier.price | escape }} <small>{{ tier.price_note | escape }}</small></p>
+              <ul class="ticks">
+{%- for point in tier.points %}
+                <li>{{ point | escape }}</li>
+{%- endfor %}
+              </ul>
+              <a class="btn{% if tier.flag != "" %} btn--gold{% endif %} btn--sm" href="#contact">{{ t.engagements.cta | escape }}</a>
+            </article>
+{%- endfor %}
+          </div>
+          <p class="tiers-note" data-reveal>{{ t.engagements.note | escape }}</p>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq" aria-labelledby="faq-title">
+        <div class="wrap faq-grid">
+          <div class="section-head">
+            <p class="label label--rule" data-reveal>{{ t.faq.label | escape }}</p>
+            <h2 class="section-title" id="faq-title" data-reveal>
+              {{ t.faq.title | escape }} <em class="gilt">{{ t.faq.title_accent | escape }}</em>
+            </h2>
+          </div>
+
+          <div class="faq" data-reveal>
+{%- for item in t.faq.items %}
+            <details>
+              <summary>{{ item.question | escape }}<span class="faq-sign" aria-hidden="true"></span></summary>
+              <p class="answer">{{ item.answer | escape }}</p>
+            </details>
+{%- endfor %}
+          </div>
+        </div>
+      </section>
+
+      <!-- Closing call to action: the brief builder (assets/brief.js). -->
+      <section class="closing" id="contact" aria-labelledby="contact-title">
+        <div class="wrap">
+          <p class="label" data-reveal>{{ t.contact.label | escape }}</p>
+          <h2 id="contact-title" data-reveal>{{ t.contact.title | escape }} <em class="gilt">{{ t.contact.title_accent | escape }}</em></h2>
+          <p class="lede" data-reveal>{{ t.contact.lede | escape }}</p>
+
+          <form
+            class="brief"
+            id="brief"
+            action="https://wa.me/{{ c.whatsapp }}"
+            method="get"
+            target="_blank"
+            novalidate
+            data-reveal
+            data-phone="{{ c.whatsapp }}"
+            data-email="{{ c.email | escape }}"
+            data-greeting="{{ t.contact.message_greeting | escape }}"
+            data-l-kind="{{ t.contact.message_kind | escape }}"
+            data-l-when="{{ t.contact.message_when | escape }}"
+            data-l-name="{{ t.contact.message_name | escape }}"
+            data-signature="{{ t.contact.message_signature | escape }}"
+            data-subject="{{ t.contact.email_subject | escape }}"
+          >
+            <fieldset>
+              <legend>{{ t.contact.kind_question | escape }}</legend>
+              <div class="chips">
+{%- for k in t.contact.kinds %}
+                <label class="chip"><input type="radio" name="kind" value="{{ k | escape }}"{% if forloop.index == t.contact.kind_preselected %} checked{% endif %} /><span>{{ k | escape }}</span></label>
+{%- endfor %}
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>{{ t.contact.when_question | escape }}</legend>
+              <div class="chips">
+{%- for w in t.contact.whens %}
+                <label class="chip"><input type="radio" name="when" value="{{ w | escape }}"{% if forloop.index == t.contact.when_preselected %} checked{% endif %} /><span>{{ w | escape }}</span></label>
+{%- endfor %}
+              </div>
+            </fieldset>
+
+            <div class="brief-field">
+              <label for="brief-name">{{ t.contact.name_label | escape }} <span>{{ t.contact.name_optional | escape }}</span></label>
+              <input id="brief-name" name="name" type="text" autocomplete="name" />
+            </div>
+
+            <div class="brief-field">
+              <label for="brief-text">{{ t.contact.text_label | escape }}</label>
+              <textarea id="brief-text" name="text" rows="4" required aria-describedby="brief-help brief-error"></textarea>
+              <p class="brief-help" id="brief-help">{{ t.contact.text_help | escape }}</p>
+              <p class="brief-error" id="brief-error" role="alert" hidden>{{ t.contact.text_error | escape }}</p>
+            </div>
+
+            <div class="brief-actions">
+              <button class="btn btn--gold" type="submit" data-send="whatsapp">{{ t.contact.send_whatsapp | escape }}</button>
+              <button
+                class="btn"
+                type="submit"
+                data-send="email"
+                formaction="mailto:{{ c.email | escape }}"
+                formmethod="post"
+                formenctype="text/plain"
+              >{{ t.contact.send_email | escape }}</button>
+            </div>
+          </form>
+
+          <ul class="direct" data-reveal>
+            <li><a href="https://wa.me/{{ c.whatsapp }}" rel="noopener"><b>{{ t.contact.whatsapp | escape }}</b> {{ c.whatsapp_display | escape }}</a></li>
+            <li><a href="{{ c.discord | escape }}" rel="noopener"><b>{{ t.contact.discord | escape }}</b> {{ t.contact.discord_value | escape }}</a></li>
+            <li><a href="mailto:{{ c.email | escape }}"><b>{{ t.contact.email | escape }}</b> {{ c.email | escape }}</a></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <div>
+            <a class="brand" href="{{ here.path }}">
+              <img src="/assets/logo-mark-192.webp?v={{ site.asset_version }}" alt="" width="44" height="44" />
+              <span class="brand-text">
+                <span class="brand-name">AmziXz</span>
+                <span class="brand-sub">Services</span>
+              </span>
+            </a>
+            <p class="footer-tagline">{{ t.footer.tagline | escape }}</p>
+          </div>
+          <ul class="footer-nav">
+            <li><a href="{{ t.footer.main_site_url | escape }}">{{ t.footer.main_site | escape }}</a></li>
+            <li><a href="{{ t.footer.ventures_url | escape }}">{{ t.footer.ventures | escape }}</a></li>
+            <li><a href="{{ c.discord | escape }}" rel="noopener">{{ t.footer.discord | escape }}</a></li>
+            <li><a href="mailto:{{ c.email | escape }}">{{ t.footer.email | escape }}</a></li>
+          </ul>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; <span id="year">2026</span> AmziXz</p>
+          <p>{{ t.footer.place | escape }}</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

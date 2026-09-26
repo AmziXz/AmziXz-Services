@@ -1,0 +1,243 @@
+# LATVIEŠU: visi vārdi lapā services.amzixz.id.lv/lv/
+#
+# KĀ LABOT
+#   Mainiet tekstu starp pēdiņām. Visu pārējo atstājiet, kā ir.
+#
+#     title: "Mājaslapas un lietotnes,"   <- mainiet šo daļu
+#     ^^^^^                                   nekad šo (atslēgu)
+#
+#   - Katram tekstam jāpaliek pēdiņās "…".
+#   - Ja tekstā vajag pēdiņas, lietojiet latviešu „šādas”.
+#   - Rindas, kas sākas ar #, ir piezīmes kā šī. Lapā tās neparādās.
+#   - "_accent" teksti ir virsraksta zeltītās slīprakstā beigas.
+#   - en.yml ir tieši tādas pašas atslēgas. Ja šeit pievienojat vai dzēšat
+#     rindu, dariet to pašu tur.
+#
+# JA KAUT KO SALAUŽAT
+#   Izmaiņas netiks publicētas. Iepriekšējā versija paliek tiešsaistē, un
+#   GitHub atsūta e-pastu, ka Pages būvējums neizdevās. Atsauciet labojumu
+#   (vai izlabojiet salauzto pēdiņu/atkāpi) un saglabājiet vēlreiz.
+
+meta:
+  title: "AmziXz Services · Mājaslapas un lietotnes, darinātas pēc mēra"
+  description: "AmziXz Services izstrādā mājaslapas un lietotnes pēc Jūsu uzdevuma, par fiksētu cenu, par kuru vienojamies pirms darba sākuma. Pirmkods paliek Jums."
+  share_description: "Mājaslapas un lietotnes pēc Jūsu uzdevuma, par fiksētu cenu, par kuru vienojamies iepriekš. Pirmkods paliek Jums."
+  share_image_alt: "AmziXz Services logotips, zelts uz melna"
+  # Ko meklētājprogrammas nolasa par uzņēmumu (lapā neredzams)
+  schema_description: "Mājaslapu un lietotņu izstrāde pēc uzdevuma, par fiksētu cenu."
+  schema_offers:
+    - "Mājaslapu izstrāde"
+    - "Lietotņu izstrāde"
+
+# Ekrāna lasītāju un galvenes uzraksti
+ui:
+  skip: "Pāriet uz saturu"
+  sections: "Sadaļas"
+  language: "Valoda"
+  menu: "Izvēlne"
+  enquire: "Sazināties"
+
+nav:
+  services: "Pakalpojumi"
+  work: "Darbi"
+  process: "Darba gaita"
+  engagements: "Sadarbība"
+  faq: "Jautājumi"
+
+hero:
+  label: "Izstrāde pēc pasūtījuma"
+  title: "Mājaslapas un lietotnes,"
+  title_accent: "darinātas pēc mēra."
+  lede: "Izstrādājam pēc Jūsu uzdevuma, par cenu, par kuru vienojamies pirms darba sākuma, un nododam kopā ar visu pirmkodu. Bez veidnēm. Bez ikmēneša saistībām."
+  cta: "Pieprasīt piedāvājumu"
+  secondary: "Ko mēs veidojam"
+  # Trīs faktu rinda pirmā ekrāna apakšā
+  facts:
+    - "Latvija, strādājam visā pasaulē"
+    - "Fiksēta cena, saskaņota iepriekš"
+    - "Jūsu kods paliek Jums"
+
+standard:
+  label: "Mūsu standarts"
+  # Lielais teikums: before + accent (zeltīts) + after
+  statement_before: "Katrs projekts sākas ar"
+  statement_accent: "fiksētu cenu"
+  statement_after: "un beidzas ar to, ka katra koda rinda pieder Jums."
+  # Rādās kā I. II. III. IV. šādā secībā
+  principles:
+    - title: "Fiksēta cena"
+      text: "Apjoms, cena un termiņš, par kuriem vienojamies pirms darba sākuma."
+    - title: "Paliek Jums"
+      text: "Viss pirmkods tiek nodots Jums. Izvietojiet to, mainiet to vai nododiet citam izstrādātājam."
+    - title: "Kārtīga izstrāde"
+      text: "Pielāgojas jebkuram ekrānam, ir piekļūstama un ātra jau pēc noklusējuma."
+    - title: "Godīgas atbildes"
+      text: "Ja projekts mums neder, mēs to pasakām uzreiz un, ja varam, iesakām labāku risinājumu."
+
+services:
+  label: "Ko mēs veidojam"
+  title: "Trīs lietas,"
+  title_accent: "izdarītas kārtīgi."
+  lede: "Katrai sagatavojam atsevišķu piedāvājumu. Pastāstiet, ko veidojat, un mēs pateiksim, kas tam nepieciešams."
+  # Vārds, kas parādās katras rindas beigās, uzbraucot ar peli
+  go: "Sazināties"
+  items:
+    - title: "Mājaslapas"
+      text: "Uzņēmumu mājaslapas, produktu lapas un portfolio, sākot no vienas lapas līdz pilnai vietnei ar daudzām sadaļām."
+    - title: "Lietotnes"
+      text: "Tīmekļa un darbvirsmas lietotnes, veidotas atbilstoši tam, kā Jūs patiešām strādājat."
+    - title: "Palaišana un atbalsts"
+      text: "Izvietošana Jūsu domēnā, kārtīga nodošana un, ja vēlaties, uzturēšana pēc palaišanas."
+
+work:
+  label: "Nesenie darbi"
+  title: "Darbi, ko var"
+  title_accent: "apmeklēt."
+  tag: "Personīgā vietne"
+  name: "amzixz.id.lv"
+  text: "AmziXz mājvieta tīmeklī: darbi, uzņēmumi un kontakti, latviešu un angļu valodā."
+  facts:
+    - label: "Valodas"
+      value: "Latviešu, angļu"
+    - label: "Režīmi"
+      value: "Gaišais un tumšais"
+    - label: "Tehnoloģijas"
+      value: "HTML, CSS, JS. Bez ietvara"
+    - label: "Mitināšana"
+      value: "GitHub Pages"
+  cta: "Apmeklēt vietni"
+  visit_label: "Apmeklēt amzixz.id.lv"
+  # Kurp ved kartīte, adrese mazajā pārlūka joslā un attēls
+  url: "https://amzixz.id.lv/lv/"
+  address: "amzixz.id.lv/lv"
+  image: "/assets/work-amzixz-lv.webp"
+  image_alt: "amzixz.id.lv sākumlapa tumšajā režīmā ar virsrakstu „Zinkārīgs par visu. Lielāko daļu arī būvēju.”"
+
+process:
+  label: "Darba gaita"
+  title: "Kā norit"
+  title_accent: "projekts."
+  lede: "Bez pārdošanas zvaniem un liekiem papīriem. Lai sāktu, pietiek ar vienu ziņu."
+  # Rādās kā I, II, III šādā secībā
+  steps:
+    - title: "Saruna"
+      text: "Uzrakstiet mums WhatsApp, Discord vai e-pastā, ko veidojat, aptuveni kad tas nepieciešams, un piemērus, kas Jums patīk."
+    - title: "Fiksēts piedāvājums"
+      text: "Mēs atsūtām apjomu, fiksētu cenu un termiņu. Ja projekts mums neder, mēs to pasakām."
+    - title: "Izstrāde un nodošana"
+      text: "Progresu redzat tā gaitā. Beigās saņemat gatavo darbu, pirmkodu un visu, kas nepieciešams tā darbināšanai."
+
+engagements:
+  label: "Sadarbība"
+  title: "Sāciet ar ieceri,"
+  title_accent: "nevis cenrādi."
+  lede: "Izvēlieties tuvāko variantu, un mēs to kārtīgi novērtēsim. Katra cena tiek fiksēta pirms darba sākuma."
+  cta: "Sazināties"
+  note: "Cena bez apjoma ir minējums. Jūsējā tiek fiksēta pirms darba sākuma."
+  # flag: zeltītā birka virs kartītes. Atstājiet "", ja nevajag. Kartīte ar
+  # birku ir izcelta.
+  tiers:
+    - name: "Vienas lapas vietne"
+      price: "Cena pēc pieprasījuma"
+      price_note: "Parasti ātrākais variants"
+      flag: ""
+      points:
+        - "Viena lapa, kas pārvērš apmeklētājus klientos"
+        - "Pielāgota visiem ekrāniem, gaišā un tumšā režīmā"
+        - "Izvietota Jūsu domēnā"
+    - name: "Pilna mājaslapa"
+      price: "Cena pēc pieprasījuma"
+      price_note: "Lielākā daļa projektu ir šeit"
+      flag: "Pieprasītākais"
+      points:
+        - "Vairākas lapas un sadaļas"
+        - "Gatava meklētājiem, ātra pēc noklusējuma"
+        - "Vairākās valodās, ja nepieciešams"
+        - "Pirmkods un nodošana iekļauti"
+    - name: "Lietotne"
+      price: "Cena pēc pieprasījuma"
+      price_note: "Apjomu nosakām kopā pirms sākuma"
+      flag: ""
+      points:
+        - "Tīmekļa vai darbvirsmas lietotne"
+        - "Veidota ap Jūsu reālo darba procesu"
+        - "Iespējams ilgtermiņa atbalsts"
+
+faq:
+  label: "Jautājumi"
+  title: "Vērts atbildēt"
+  title_accent: "uzreiz."
+  items:
+    - question: "Kāpēc nav cenrāža?"
+      answer: "Jo cena bez apjoma ir minējums. Piecu sadaļu mārketinga vietne un piecu ekrānu lietotne abas ir „mājaslapa”, līdz kāds pajautā, kas tajās patiesībā ir. Pastāstiet, kas Jums vajadzīgs, un saņemsiet reālu, fiksētu cenu, nevis diapazonu, uz kuru nevar paļauties."
+    - question: "Vai tas, ko izstrādājat, pieder man?"
+      answer: "Jā. Izstrādes darbs tiek nodots kopā ar pirmkodu, un Jūs to varat izvietot, mainīt vai nodot citam izstrādātājam. Nekādas piesaistes, nekas netiek paturēts."
+    - question: "Cik ilgi aizņem projekts?"
+      answer: "Vienas lapas vietne parasti prasa dienas, nevis nedēļas; pilna vietne vai lietotne ir atkarīga no apjoma. Termiņu saņemat kopā ar piedāvājumu, pirms darbs sākas."
+    - question: "Cik izmaksā vietnes uzturēšana?"
+      answer: "Bieži vien neko, izņemot domēnu. Statiskas vietnes var bez maksas izvietot GitHub Pages, tāpat kā šo vietni un amzixz.id.lv. Ja projektam vajadzīgs serveris vai maksas pakalpojumi, mēs pastāstām, cik tie izmaksā, pirms Jūs piekrītat."
+
+contact:
+  label: "Pieteikumi"
+  title: "Pastāstiet, ko"
+  title_accent: "veidojat."
+  lede: "Atbildiet uz trim jautājumiem un nosūtiet, kā Jums ērtāk. Lai sagatavotu piedāvājumu, pietiek ar aptuvenu ideju."
+  # Pieteikuma forma
+  kind_question: "Kas Jums nepieciešams?"
+  kinds:
+    - "Mājaslapa"
+    - "Vienas lapas vietne"
+    - "Lietotne"
+    - "Vēl nezinu"
+  # Kura atbilde ir izvēlēta, atverot lapu: 1 = pirmā no augšas
+  kind_preselected: 1
+  when_question: "Kad tas nepieciešams?"
+  whens:
+    - "Pēc iespējas ātrāk"
+    - "Mēneša laikā"
+    - "1–3 mēnešu laikā"
+    - "Bez noteikta termiņa"
+  when_preselected: 2
+  name_label: "Jūsu vārds"
+  name_optional: "(nav obligāts)"
+  text_label: "Pastāstiet par to"
+  text_help: "Kam tas paredzēts, kas tam jādara un kuras vietnes Jums patīk."
+  text_error: "Uzrakstiet teikumu vai divus, lai varam sagatavot precīzu piedāvājumu."
+  send_whatsapp: "Sūtīt WhatsApp"
+  send_email: "Sūtīt e-pastā"
+  # Ziņa, kas pienāk WhatsApp vai e-pastā
+  message_greeting: "Labdien, AmziXz Services!"
+  message_kind: "Projekts"
+  message_when: "Termiņš"
+  message_name: "Vārds"
+  message_signature: "(nosūtīts no services.amzixz.id.lv)"
+  email_subject: "Projekta pieteikums"
+  # Trīs tiešie kontakti zem formas
+  whatsapp: "WhatsApp"
+  discord: "Discord"
+  discord_value: "AmziXz serveris"
+  email: "E-pasts"
+
+footer:
+  tagline: "Mājaslapas un lietotnes, darinātas pēc mēra."
+  main_site: "Galvenā vietne"
+  ventures: "Uzņēmumi"
+  discord: "Discord"
+  email: "E-pasts"
+  place: "Latvija · Visā pasaulē"
+  # Kurp ved "Galvenā vietne" un "Uzņēmumi"
+  main_site_url: "https://amzixz.id.lv/lv/"
+  ventures_url: "https://amzixz.id.lv/lv/ventures"
+
+# Lapa, kas parādās, ja adrese neeksistē
+not_found:
+  title: "AmziXz Services · Lapa nav atrasta"
+  label: "Kļūda 404"
+  heading: "Šīs lapas"
+  heading_accent: "šeit nav."
+  text: "Saite var būt novecojusi vai adrese nedaudz kļūdaina. Viss šajā vietnē atrodas vienā lapā, tāpēc sāciet tur."
+  back: "Atpakaļ uz pakalpojumiem"
+  main_site: "Galvenā vietne"
+  # Viena rinda 404 lapā zem angļu teksta
+  other_line: "Šī lapa neeksistē."
+  other_link: "Uz latviešu versiju"

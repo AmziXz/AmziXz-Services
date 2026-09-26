@@ -1,0 +1,243 @@
+# ENGLISH: every word on services.amzixz.id.lv/
+#
+# HOW TO EDIT
+#   Change the text between the double quotes. Leave everything else alone.
+#
+#     title: "Websites and apps,"        <- change this part
+#     ^^^^^                                  never this part (the key)
+#
+#   - Keep the double quotes around every text.
+#   - To use a double quote inside a text, use the curly ones: “like this”.
+#   - Lines starting with # are notes like this one. They never show on the site.
+#   - "_accent" texts are the gold italic end of a heading.
+#   - lv.yml has exactly the same keys. If you add or remove a line here, do
+#     the same there.
+#
+# IF YOU MAKE A MISTAKE
+#   The site will not publish the change. The previous version stays live and
+#   GitHub emails you that the Pages build failed. Undo the edit (or fix the
+#   quote/indent you broke) and commit again.
+
+meta:
+  title: "AmziXz Services · Websites and applications, made to measure"
+  description: "AmziXz Services builds websites and applications to your brief, at a fixed price agreed before any work starts. You keep the source."
+  share_description: "Websites and applications built to your brief, at a fixed price agreed up front. You keep the source."
+  share_image_alt: "AmziXz Services logo, gold on black"
+  # What search engines read about the business (not visible on the page)
+  schema_description: "Website and application development, built to a brief at a fixed price."
+  schema_offers:
+    - "Website development"
+    - "Application development"
+
+# Screen-reader and header labels
+ui:
+  skip: "Skip to content"
+  sections: "Sections"
+  language: "Language"
+  menu: "Menu"
+  enquire: "Enquire"
+
+nav:
+  services: "Services"
+  work: "Work"
+  process: "Process"
+  engagements: "Engagements"
+  faq: "FAQ"
+
+hero:
+  label: "Websites & applications"
+  title: "Websites and apps,"
+  title_accent: "made to measure."
+  lede: "Built to your brief, at a price fixed before we start, and handed over with every line of source. No templates. No monthly lock-in."
+  cta: "Request a quote"
+  secondary: "What we make"
+  # The small line of three facts at the bottom of the first screen
+  facts:
+    - "Latvia, working worldwide"
+    - "Fixed price, agreed first"
+    - "Your code, yours to keep"
+
+standard:
+  label: "Our standard"
+  # The big sentence reads: before + accent (gold) + after
+  statement_before: "Every project starts with a"
+  statement_accent: "fixed price"
+  statement_after: "and ends with you owning every line of it."
+  # Shown as I. II. III. IV. in this order
+  principles:
+    - title: "A fixed price"
+      text: "Scope, price and timeline, agreed before any work starts."
+    - title: "Yours to keep"
+      text: "The full source, handed over. Host it, change it, or take it to someone else."
+    - title: "Built properly"
+      text: "Responsive at every size, accessible, and fast by default."
+    - title: "Straight answers"
+      text: "If a project is not a fit, we say so up front, and point you somewhere better if we can."
+
+services:
+  label: "What we make"
+  title: "Three things,"
+  title_accent: "done properly."
+  lede: "Each one is quoted on its own scope. Tell us what you are building and we will tell you what it takes."
+  # The word that appears on hover at the end of each row
+  go: "Enquire"
+  items:
+    - title: "Websites"
+      text: "Business sites, landing pages and portfolios, from a single page to a full multi-page site."
+    - title: "Applications"
+      text: "Web and desktop applications, built around the way you actually work."
+    - title: "Launch & care"
+      text: "Deployment on your domain, a proper handover, and optional maintenance after launch."
+
+work:
+  label: "Recent work"
+  title: "Work you can"
+  title_accent: "visit."
+  tag: "Personal site"
+  name: "amzixz.id.lv"
+  text: "The AmziXz home on the web: work, ventures and contact, in English and Latvian."
+  facts:
+    - label: "Languages"
+      value: "English, Latvian"
+    - label: "Themes"
+      value: "Light and dark"
+    - label: "Stack"
+      value: "HTML, CSS, JS. No framework"
+    - label: "Hosting"
+      value: "GitHub Pages"
+  cta: "Visit the site"
+  visit_label: "Visit amzixz.id.lv"
+  # Where the card links, the address shown in the little browser bar, and the picture
+  url: "https://amzixz.id.lv/"
+  address: "amzixz.id.lv"
+  image: "/assets/work-amzixz.webp"
+  image_alt: "The amzixz.id.lv home page in dark mode, headline: Curious about everything. Building most of it."
+
+process:
+  label: "Process"
+  title: "How a project"
+  title_accent: "runs."
+  lede: "No sales call and no paperwork. A message is enough to start."
+  # Shown as I, II, III in this order
+  steps:
+    - title: "Conversation"
+      text: "Message us on WhatsApp, Discord or by email with what you are building, roughly when you need it, and any examples you like."
+    - title: "A fixed quote"
+      text: "We come back with the scope, a fixed price and a timeline. If it is not a fit, we say so."
+    - title: "Build & handover"
+      text: "You see progress as it happens. At the end you get the finished work, the source, and everything needed to run it."
+
+engagements:
+  label: "Engagements"
+  title: "Start from a shape,"
+  title_accent: "not a price list."
+  lede: "Pick the closest fit and we will price it properly. Every quote is fixed before work begins."
+  cta: "Enquire"
+  note: "A number without a scope is a guess. Yours is fixed before we start."
+  # flag: the gold tag above a card. Leave it "" for none. The card with a
+  # flag is the highlighted one.
+  tiers:
+    - name: "Landing Page"
+      price: "Price on request"
+      price_note: "Usually the fastest to ship"
+      flag: ""
+      points:
+        - "One page, built to convert"
+        - "Responsive, light and dark"
+        - "Deployed on your domain"
+    - name: "Full Website"
+      price: "Price on request"
+      price_note: "Most projects land here"
+      flag: "Most requested"
+      points:
+        - "Multiple pages and sections"
+        - "Search-engine ready, fast by default"
+        - "Multi-language if you need it"
+        - "Source and handover included"
+    - name: "Application"
+      price: "Price on request"
+      price_note: "Scoped together before we start"
+      flag: ""
+      points:
+        - "Web or desktop application"
+        - "Built around your actual workflow"
+        - "Ongoing support available"
+
+faq:
+  label: "Questions"
+  title: "Worth answering"
+  title_accent: "up front."
+  items:
+    - question: "Why is there no price list?"
+      answer: "Because a number without a scope is a guess. A five-section marketing site and a five-screen application are both “a website” until someone asks what is actually in them. Tell us what you need and you get a real fixed price instead of a range you cannot rely on."
+    - question: "Do I own what you build?"
+      answer: "Yes. Development work is handed over with its source, and you can host it, change it, or take it to another developer. There is no lock-in and nothing is held back."
+    - question: "How long does a project take?"
+      answer: "A landing page is usually days rather than weeks; a full site or an application depends entirely on scope. You get a timeline with the quote, before any work starts."
+    - question: "What does it cost to keep a site running?"
+      answer: "Often nothing beyond your domain. Static sites can be hosted free on GitHub Pages, as this site and amzixz.id.lv both are. If your project needs a server or paid services, we tell you what they cost before you commit."
+
+contact:
+  label: "Enquiries"
+  title: "Tell us what you are"
+  title_accent: "building."
+  lede: "Answer three questions and send it however suits you. A rough idea is enough to quote from."
+  # The brief form
+  kind_question: "What do you need?"
+  kinds:
+    - "Website"
+    - "Landing page"
+    - "Application"
+    - "Not sure yet"
+  # Which answer is picked when the page opens: 1 = the first one above
+  kind_preselected: 1
+  when_question: "When do you need it?"
+  whens:
+    - "As soon as possible"
+    - "Within a month"
+    - "In 1–3 months"
+    - "No fixed date"
+  when_preselected: 2
+  name_label: "Your name"
+  name_optional: "(optional)"
+  text_label: "Tell us about it"
+  text_help: "What it is for, what it needs to do, and any sites you like."
+  text_error: "Add a sentence or two so we can quote properly."
+  send_whatsapp: "Send on WhatsApp"
+  send_email: "Send by email"
+  # The message that arrives on WhatsApp or in the email
+  message_greeting: "Hello AmziXz Services,"
+  message_kind: "Project"
+  message_when: "Timeline"
+  message_name: "Name"
+  message_signature: "(sent from services.amzixz.id.lv)"
+  email_subject: "Project enquiry"
+  # The three direct lines under the form
+  whatsapp: "WhatsApp"
+  discord: "Discord"
+  discord_value: "AmziXz server"
+  email: "Email"
+
+footer:
+  tagline: "Websites and applications, made to measure."
+  main_site: "Main site"
+  ventures: "Ventures"
+  discord: "Discord"
+  email: "Email"
+  place: "Latvia · Worldwide"
+  # Where "Main site" and "Ventures" go
+  main_site_url: "https://amzixz.id.lv/"
+  ventures_url: "https://amzixz.id.lv/ventures"
+
+# The page shown for an address that does not exist
+not_found:
+  title: "AmziXz Services · Page not found"
+  label: "Error 404"
+  heading: "This page"
+  heading_accent: "isn't here."
+  text: "The link may be old, or the address slightly off. Everything on this site lives on one page, so start there."
+  back: "Back to services"
+  main_site: "Main site"
+  # One line in each other language, under the English text
+  other_line: "This page doesn't exist."
+  other_link: "Go to the English version"

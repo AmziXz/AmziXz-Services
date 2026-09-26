@@ -1,0 +1,17 @@
+# The languages the site is published in, in the order the menu shows them.
+# The first one is the default: it lives at / and gets the 404 page.
+#
+# To add a language (for example Russian):
+#   1. Copy _data/lang/en.yml to _data/lang/ru.yml and translate the texts.
+#   2. Add an entry below.
+#   3. Copy lv/index.html to ru/index.html and change "lang: lv" to "lang: ru".
+- code: en
+  name: English
+  short: EN
+  path: /
+  locale: en_GB
+- code: lv
+  name: Latviešu
+  short: LV
+  path: /lv/
+  locale: lv_LV
