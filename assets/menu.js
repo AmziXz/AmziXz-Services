@@ -64,3 +64,28 @@
     wide.addListener(onWidthChange);
   }
 })();
+
+/* Language menu.
+ *
+ * A native <details>, so it opens, closes and works from the keyboard with no
+ * script at all. This only adds what <details> lacks: Escape closes it and
+ * returns focus to its button, and a click anywhere else closes it.
+ */
+(function () {
+  "use strict";
+
+  var menu = document.querySelector(".lang-menu");
+  if (!menu) return;
+  var summary = menu.querySelector("summary");
+
+  document.addEventListener("click", function (event) {
+    if (menu.open && !menu.contains(event.target)) menu.open = false;
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && menu.open) {
+      menu.open = false;
+      summary.focus();
+    }
+  });
+})();

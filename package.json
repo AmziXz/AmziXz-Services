@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Local tooling for services.amzixz.id.lv. The site has no build step and ships no dependencies; nothing here is served by GitHub Pages.",
+  "description": "Local tooling for services.amzixz.id.lv. GitHub Pages builds the site with Jekyll; these packages only let serve.js preview the templates locally and let check.js verify the translations. Nothing here is served.",
   "license": "MIT",
   "scripts": {
     "start": "node serve.js 8001",
-    "serve": "node serve.js 8001"
+    "serve": "node serve.js 8001",
+    "check": "node check.js"
+  },
+  "devDependencies": {
+    "js-yaml": "^5.4.2",
+    "liquidjs": "^10.29.0"
   }
 }

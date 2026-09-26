@@ -1423,36 +1423,115 @@ em.gilt,
   border-top: 0;
 }
 
-/* ---------- Language switch ---------- */
+/* ---------- Language menu ----------
 
-.lang-switch {
-  display: flex;
-  align-items: center;
+   A <details> disclosure. The summary is the button; the list drops below
+   it, aligned to its right edge so it never runs off a phone screen. */
+
+.lang-menu {
+  position: relative;
 }
 
-.lang-switch a {
-  display: inline-grid;
-  place-items: center;
+.lang-menu summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   min-width: 2.75rem;
   min-height: 2.75rem;
-  color: var(--faint);
+  padding: 0 0.7rem;
+  border: 1px solid var(--hairline-gold);
+  color: var(--ink);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.2em;
-  text-decoration: none;
-  transition: color var(--dur-hover) var(--ease);
+  list-style: none;
+  cursor: pointer;
+  transition: border-color var(--dur-hover) var(--ease);
 }
 
-.lang-switch a + a {
-  border-left: 1px solid var(--hairline-gold);
+.lang-menu summary::-webkit-details-marker {
+  display: none;
 }
 
-.lang-switch a[aria-current="true"] {
+.lang-menu .globe {
+  width: 1rem;
+  height: 1rem;
   color: var(--gold);
 }
 
+.lang-menu .chev {
+  width: 0.85rem;
+  height: 0.85rem;
+  color: var(--faint);
+  transition: transform var(--dur-hover) var(--ease);
+}
+
+.lang-menu[open] summary {
+  border-color: var(--gold);
+}
+
+.lang-menu[open] .chev {
+  transform: rotate(180deg);
+}
+
+.lang-list {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 60;
+  min-width: 12rem;
+  padding: var(--sp-2) 0;
+  border: 1px solid var(--hairline-gold);
+  background: var(--surface);
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.9);
+}
+
+.lang-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  min-height: 3rem;
+  padding: 0 var(--sp-5);
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition:
+    color var(--dur-hover) var(--ease),
+    background-color var(--dur-hover) var(--ease);
+}
+
+.lang-code {
+  color: var(--faint);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.lang-list a[aria-current="true"] {
+  color: var(--ink);
+}
+
+/* The current language carries a gold rule on its left edge. */
+.lang-list a[aria-current="true"] {
+  box-shadow: inset 2px 0 0 var(--gold);
+}
+
+.lang-list a[aria-current="true"] .lang-code {
+  color: var(--gold);
+}
+
+.lang-list a:focus-visible {
+  outline-offset: -3px;
+}
+
 @media (hover: hover) and (pointer: fine) {
-  .lang-switch a:not([aria-current="true"]):hover {
+  .lang-menu summary:hover {
+    border-color: var(--gold);
+  }
+
+  .lang-list a:hover {
+    background: rgba(212, 179, 106, 0.08);
     color: var(--ink);
   }
 }
@@ -1622,7 +1701,9 @@ em.gilt,
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
-  min-height: 2.75rem;
+  /* 48px, not the bare 44: at exactly 44 a reveal in progress rounds it to
+     43.99, under the minimum. */
+  min-height: 3rem;
   color: var(--muted);
   font-size: 0.9rem;
   letter-spacing: 0.04em;
