@@ -53,8 +53,8 @@
 
   /* Rotating to landscape or widening past the breakpoint reveals the desktop
      nav; leaving aria-expanded="true" behind would misreport state. */
-  /* Same breakpoint as the nav collapse in style.css (51.25rem = 820px). */
-  var wide = window.matchMedia("(min-width: 821px)");
+  /* Same breakpoint as the nav collapse in style.css (56.25rem = 900px). */
+  var wide = window.matchMedia("(min-width: 901px)");
   function onWidthChange() {
     if (wide.matches) setOpen(false);
   }

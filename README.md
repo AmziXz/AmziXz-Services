@@ -3,13 +3,13 @@
 The AmziXz Services site: a single-page, dependency-free static site served by
 GitHub Pages at **<https://services.amzixz.id.lv>**.
 
-It sells two things:
+It sells websites and applications built to a brief, each at a fixed price
+agreed before work starts, with the source handed over.
 
-- **Developer Services**: websites and applications built to a brief, quoted per
-  project.
-- **Our Discord bot**: a bot we build, host and run. We do **not** take on custom
-  Discord bot development, and the page says so explicitly. Keep it that way; the
-  FAQ answers the question directly so nobody arrives with the wrong expectation.
+**The Discord bot is deliberately not on the page.** It is in development,
+its name isn't final, and its features aren't confirmed. It goes back on
+when it is live. The same rule covers the "Recent work" section: see
+`design-system/amzixz-services/MASTER.md`, "Content rule".
 
 ## Why this is a separate repository
 
@@ -46,11 +46,12 @@ serve.js        Local preview server (mimics Pages URL handling)
 package.json    Local tooling only — never served, no build step
 design-system/  Design decisions and where they came from (not served)
 assets/
-  style.css     Tokens, both palettes, @font-face, components
-  theme.js      Light/dark persistence — must stay a synchronous <head> script
+  style.css     Tokens, @font-face, components. One theme: black and gold
   reveal.js     Scroll reveals
   menu.js       Phone navigation menu
-  fonts/        Space Grotesk (headings) + Archivo (body), woff2, latin + latin-ext
+  fonts/        Cormorant (display, roman + italic) + Montserrat (body), woff2,
+                latin + latin-ext
+  work-amzixz.jpg    Screenshot of amzixz.id.lv for Recent work (1440x900, dark)
   logo-full.jpg      Brand master. Every icon below is cut from this.
   logo-mark.png      512px monogram, used in structured data
   logo-mark-192.png  Header, favicon, apple-touch-icon
@@ -77,9 +78,11 @@ The design system is in
 the ui-ux-pro-max queries it came from, the tokens, and which of the tool's
 suggestions were overridden and why. Read it before changing a colour.
 
-Short version: Swiss minimalism, black and white, **one** accent (gold, from the
-logo), square corners, 1px rules, a bento grid for the offer. `--gold` is for
-lines and icons only; text that needs to be gold uses `--gold-ink`.
+Short version: exaggerated minimalism in black and gold. Oversized Cormorant
+display type, Montserrat body text, hairline rules, square corners, a lot of
+space. The page background is the logo's own black (`#11100e`), and the logo
+images are blended so only the gold shows. Don't change `--bg`, and don't
+put a logo on a translucent background (MASTER.md, "The logo trick").
 
 ## Cache busting
 
@@ -92,26 +95,22 @@ without a new number leaves returning visitors on the old copy.
 ```bash
 node --input-type=module -e "
 import {readFile,writeFile} from 'node:fs/promises';
-const V=2;
+const V=3;
 for (const f of ['index.html','404.html'])
   await writeFile(f,(await readFile(f,'utf8')).replace(/\?v=\d+/g,'?v='+V),'utf8');
 "
 grep -ho '?v=[0-9]*' *.html | sort -u   # should print one line
 ```
 
-Currently `?v=1`.
+Currently `?v=2`.
 
 ## Conventions
 
 Mostly the same as the main site, for the same reasons:
 
 - **Design tokens** are CSS custom properties in `:root`. Change colours there.
-- **The palette is declared three times**: light on bare `:root`, dark under
-  `prefers-color-scheme` guarded with `:not([data-theme="light"])`, and dark
-  again under `[data-theme="dark"]`. Drop any one and the toggle stops working
-  in one direction.
-- **`theme.js` must stay synchronous in `<head>`.** Deferred, it runs after
-  first paint and the wrong palette flashes.
+- **One theme.** There is no light palette and no toggle. Every text colour
+  was measured against `--bg`, `--bg-2` and `--surface`; measure any new one.
 - **Accessibility**: skip link, `:focus-visible` ring, 44px minimum touch
   targets, decorative SVGs `aria-hidden`, one `h1`, sections labelled by their
   headings. Keep them.
@@ -119,7 +118,7 @@ Mostly the same as the main site, for the same reasons:
   `opacity` and `transform`, and is disabled under `prefers-reduced-motion`.
   Hover effects are gated behind `@media (hover: hover) and (pointer: fine)` so
   they don't stick on touch.
-- **The phone menu breakpoint (820px) lives in two places**: `style.css` and
+- **The phone menu breakpoint (900px) lives in two places**: `style.css` and
   `assets/menu.js`. Change both. Each page also has a `<noscript>` style that
   shows the links inline when the menu button cannot work.
 - **Links to the main site are absolute** (`https://amzixz.id.lv/...`). It is a
@@ -127,20 +126,15 @@ Mostly the same as the main site, for the same reasons:
 
 ## Shared with the main site, copied not linked
 
-`theme.js`, `reveal.js`, `menu.js`, `serve.js` and the Space Grotesk files are
-copies of the main site's. Loading them cross-origin would add a connection to
+`reveal.js`, `menu.js` and `serve.js` are copies of the main site's. Loading them cross-origin would add a connection to
 first paint and break this site whenever the other one moved a file. The cost is
 drift: if you fix a bug in one, fix it in the other.
 
-The theme choice is stored in `localStorage`, which is per-origin, so a
-visitor's light/dark choice on amzixz.id.lv does not carry over here. That is a
-browser rule, not a bug.
-
 ## Pricing
 
-There are deliberately **no numbers on the page**. Packages show "Custom quote"
+There are deliberately **no numbers on the page**. Engagements show "Price on request"
 and route to Discord or email. A price without a scope is a guess, and the FAQ
 explains that to the visitor rather than leaving it unsaid.
 
-If fixed prices are added later, add them to all three packages at once. One
+If fixed prices are added later, add them to all three engagements at once. One
 priced tier beside two unpriced ones reads as a mistake.

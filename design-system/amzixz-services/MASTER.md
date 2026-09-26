@@ -11,80 +11,111 @@ this site. What was kept and what was overridden are both recorded below, so the
 next person can tell a decision from a default. Do not regenerate over it with
 `--force`.
 
+## Version 2: premium (2026-09-26)
+
+Version 1 was Swiss minimalism in light and dark. The brief for version 2 was
+"more premium and luxurious". Version 1's reasoning is in git history.
+
 ## How it was derived
 
 Tool version: ui-ux-pro-max-skill `dcc40ff` (2026-09-21).
 
 | Query | Result | Used? |
 |---|---|---|
-| `"freelance web app development agency services" --design-system` | Brutalism, pink + cyan, Inter / Playfair | **No.** "agency" routed it to Creative Agency. Wrong product. |
-| `"B2B service web development studio" --design-system --variance 5 --motion 4 --density 3` | Motion-Driven, black + white, Archivo / Space Grotesk | Palette and fonts, yes. Style, no (see below). |
-| `"B2B service" --domain product` | Minimalism & Swiss Style + Bento Box Grid + Micro-interactions; Feature-Rich Showcase | **Yes. This is the direction.** |
-| `"feature-rich showcase" --domain landing` | Hero > feature grid (4–6) > benefits > proof > CTA; CTA in hero, after features, at the bottom | Yes |
-| `"services pricing quote FAQ trust" --domain landing` | Pricing-Focused: 3 tiers, popular one highlighted, FAQ, final CTA | Yes, for Packages |
-| `"trust minimal professional" --domain style` | Minimalism & Swiss Style: grid, square corners, no gradients, no soft shadows, one accent | Yes |
-| `--domain ux`: sticky header, focus not obscured | `scroll-padding-top` under the sticky header; smooth scroll | Yes |
+| `"luxury premium" --domain style` | Skeuomorphism, **Exaggerated Minimalism**, Aurora UI | Exaggerated Minimalism: its "best for" list includes luxury brands and agency landing pages. Skeuomorphism (leather, 8–12-stop gradients) and Aurora (neon mesh) are both off-brand for gold on black. |
+| `"luxury premium editorial" --domain typography` | Classic Elegant (Playfair/Inter), Luxury Minimalist (Bodoni Moda/Jost), **Luxury Serif (Cormorant/Montserrat)** | Luxury Serif: the only one listed for "high-end services", and Cormorant's high contrast matches the serif lettering in the logo. |
+| `"luxury black gold" --domain color` | Luxury/Premium Brand: `#1C1917` + gold `#A16207` | Direction yes; exact values replaced to match the logo (below). |
+| Version 1's `B2B service` profile | Feature-Rich Showcase, pricing-page structure | Section order and the three packages carried over. |
 
 ## The system
 
-**Style:** Minimalism & Swiss Style. Left-aligned type, a visible grid (1px rules),
-square corners (`--radius: 0`), no gradients, no soft shadows. The offer is a
-bento grid. Motion is micro-interactions only.
+**Style:** Exaggerated Minimalism. Oversized light-weight serif display type,
+a lot of negative space (sections pad 6–11rem), hairline rules, square corners,
+one accent. Nothing decorative that isn't gold or a rule.
 
-**Colour:** black and white, with **one** accent: gold, taken from the logo.
+**One theme.** The brand is gold on black. `--bg` is `#11100e`, the logo's own
+background colour, sampled from its edge pixels. There is no light palette.
 
-| Token | Light | Dark | Use |
+**Colour**
+
+| Token | Value | Use | Contrast on `--bg` |
 |---|---|---|---|
-| `--bg` | `#ffffff` | `#0a0a0a` | Page |
-| `--surface` | `#f6f5f1` | `#141413` | Tiles, featured package |
-| `--border` | `#e3e0d8` | `#2a2825` | Rules and outlines |
-| `--ink` | `#0c0c0c` | `#f5f4f0` | Text |
-| `--muted` | `#57534e` | `#a8a29e` | Secondary text (7.6:1 / 7.9:1) |
-| `--gold` | `#b08d3c` | `#d6b25e` | Lines, borders, icons. **Never text on white** (3.1:1) |
-| `--gold-ink` | `#8a6516` | `#d6b25e` | Gold you can read (5.3:1 / 9.8:1) |
-| `--cta-bg` | `#0c0c0c` | `#d6b25e` | Primary button |
-| `--band-*` | always dark | always dark | Hero sheet and closing CTA |
+| `--bg` | `#11100e` | Page. Must stay equal to the logo background | — |
+| `--bg-2` | `#161512` | Alternate sections | — |
+| `--surface` | `#1b1916` | Cards, featured tier | — |
+| `--ink` | `#f2ede3` | Headings, body emphasis | 16.3:1 |
+| `--muted` | `#a8a196` | Body text | 7.4:1 |
+| `--faint` | `#8a8378` | Labels, footnotes | 5.1:1 |
+| `--gold` | `#d4b36a` | Labels, rules, button edges, focus | 9.5:1 |
+| `--gold-grad` | `#f3dea0 → #d4b36a → #a8802f → #e7c982` | Display type and filled buttons only | darkest stop 5.3:1 |
+| `--hairline`, `--hairline-gold` | `#2e2920`, `#4a3f29` | Decorative rules only | — |
 
-Every text pair above clears WCAG AA (4.5:1) and was measured, not eyeballed.
+Filled gold buttons carry `--bg` text: 5.3:1 on the gradient's darkest stop.
+Anything you must see to use a control (edges, focus ring) is `--gold`, never
+a hairline.
 
-**Type:** Space Grotesk for headings (the brand font, shared with amzixz.id.lv),
-Archivo for body. Both self-hosted as variable woff2, latin + latin-ext.
+**Type:** Cormorant (display: weight 300–400, italic for the gold accent words)
+and Montserrat (body at 16px, labels in letter-spaced capitals at 0.3em,
+echoing the "S E R V I C E S" line in the logo). Both self-hosted, variable,
+latin + latin-ext.
 
-**Spacing:** density 3/10 (spacious). Sections pad 4–7.5rem. 8px base.
+**Motion:** slow to arrive, quick to respond. Reveals take 1000ms, hovers
+320ms, on `cubic-bezier(0.16, 1, 0.3, 1)`. Buttons fill with gold from the
+left on hover; index rows draw a gold rule. Only `opacity` and `transform`
+animate. All of it is off under `prefers-reduced-motion`.
 
-**Motion:** 200ms hovers, 420ms scroll reveals, `cubic-bezier(0.23, 1, 0.32, 1)`.
-Only `opacity` and `transform` animate. Everything is off under
-`prefers-reduced-motion`.
+**Texture:** a static SVG film grain at 4.5% opacity over the page. It keeps
+large areas of near-black from looking like flat plastic. It never
+intercepts clicks.
+
+## The logo trick
+
+`logo-mark.png` has a square a shade lighter than its padding, and the letters
+run right to that square's edges, so a feathered mask would clip them. Instead
+every logo image gets `filter: contrast(1.3)` (which pushes the near-blacks to
+pure black) and `mix-blend-mode: lighten` (which makes pure black disappear).
+Only the gold is left. **This needs an opaque backdrop**, which is why the
+header is solid rather than translucent. Put the mark on a translucent
+background and the square comes back as a faint box.
+
+## Content rule: Recent work
+
+Only work that is **live, confirmed and defensible** goes in Recent work:
+
+- **live:** a visitor can open it;
+- **confirmed:** every fact on the card is true, and the name is final;
+- **defensible:** if a client asks how it was built, the answer matches the card.
+
+As of 2026-09-26 that is only amzixz.id.lv. Two projects were considered and
+held back:
+
+- **Sable** (Discord bot): not live, name not final, no confirmed feature set.
+  The bot is also off the offer entirely until it launches. The previous
+  version of this page called it "Live", which was false.
+- **Risku Matrica** (client project): name unconfirmed (the codebase is
+  `riska-matrica-v0`), the client is unknown, and so is whether they can be
+  named. Who wrote it is also unconfirmed. Add it when those are answered.
 
 ## Overrides, and why
 
-- **Style: Motion-Driven → Minimalism & Swiss.** The `--design-system`
-  aggregator scored a storytelling/motion pattern built for portfolios. The
-  product table's own B2B Service row says Swiss + Bento, and a quote-driven
-  services page needs clarity more than choreography.
-- **Colour: "professional blue" → gold.** The B2B row suggests blue + grey. The
-  AmziXz Services logo is gold on black, and a blue accent beside a gold logo
-  looks like two brands. Kept the tool's black/white base and swapped the one
-  accent for the logo's gold.
-- **Gold split into two tokens.** Bright gold on white is 3.1:1, which fails
-  for text. `--gold-ink` is a darker bronze for anything you have to read.
-- **Heading/body order.** The `--design-system` output put Archivo on headings;
-  the pairing's own notes and its Tailwind config put Space Grotesk on
-  headings. Went with the notes: that also keeps headings in the brand font.
-- **No GSAP.** `--motion 4` attached a GSAP stagger snippet. This site ships no
-  dependencies, so the same stagger is done with IntersectionObserver and
-  `data-reveal-delay` (`assets/reveal.js`).
-- **No social-proof section.** The Feature-Rich pattern asks for one. There are
-  no client testimonials or case studies yet, and inventing them is worse than
-  leaving the slot out. **Add this section the moment there is real proof** —
-  it is the biggest gap on the page.
+- **Colour values:** the tool's `#1C1917` / `#A16207` became the logo's own
+  `#11100e` and golds sampled to match the logo's metal. Using the tool's black
+  would put a visible box around every logo.
+- **One theme instead of two:** a luxury brand commits to one look, and the
+  logo only works on black. Agreed with the owner on 2026-09-26.
+- **No GSAP:** the site ships no dependencies. The staggered reveal is
+  IntersectionObserver plus `data-reveal-delay` (`assets/reveal.js`).
+- **No testimonials section:** the pattern asks for social proof. There are no
+  client testimonials yet, and inventing them is worse than leaving the slot
+  out.
 
 ## Anti-patterns for this site
 
-- Emoji as icons (use inline SVG, `aria-hidden`).
-- Gold (`--gold`) for text on a light background.
-- A second accent colour.
-- Rounded "friendly SaaS" cards and soft drop shadows.
-- Prices on one package but not the others (see README, Pricing).
+- A second accent colour, or a light theme.
+- Gold gradient on body-size text (use `--gold`).
+- Rounded "friendly SaaS" cards or soft drop shadows on cards.
+- Emoji as icons.
+- Any claim about a project that the owner has not confirmed.
+- Prices on one engagement but not the others (see README, Pricing).
 - Hover-only affordances: hover styles are gated behind
   `@media (hover: hover) and (pointer: fine)`.

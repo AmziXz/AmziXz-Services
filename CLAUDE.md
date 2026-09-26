@@ -43,6 +43,9 @@ node serve.js 8001
   gitignored for that reason. `_config.yml` keeps the notes, `package.json` and
   `serve.js` from being published; add any new tooling file to its `exclude` list.
 - After changing anything in `/assets`, bump `?v=N` in **both** pages (README,
-  Cache busting). Currently `?v=1`.
-- New text colours: measure contrast against `--bg` and `--surface` in both
-  themes. `--gold` is not a text colour on light backgrounds.
+  Cache busting). Currently `?v=2`.
+- New text colours: measure contrast against `--bg`, `--bg-2` and `--surface`.
+  The gold gradient is for display-size type only.
+- **Nothing goes on the page that the owner hasn't confirmed.** Recent work is
+  live, confirmed and defensible, or it is not there. See MASTER.md, "Content
+  rule", for what is being held back and why.
