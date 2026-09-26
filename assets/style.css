@@ -96,8 +96,12 @@
   --serif: "Cormorant", "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 
-  --t-hero: clamp(3.1rem, 1.3rem + 7vw, 8rem);
-  --t-h2: clamp(2.6rem, 1.6rem + 4vw, 5.25rem);
+  /* Display sizes follow the viewport's HEIGHT as well as its width. Width
+     alone made the hero headline 128px on a 1920x1080 screen at 125% Windows
+     scaling (a 1536x700 viewport), which pushed the call to action below the
+     fold on every common laptop. min() takes whichever is smaller. */
+  --t-hero: clamp(2.75rem, min(1.3rem + 7vw, 1rem + 10.5vh), 8rem);
+  --t-h2: clamp(2.4rem, min(1.6rem + 4vw, 1rem + 7vh), 5.25rem);
   --t-h3: clamp(1.8rem, 1.35rem + 1.7vw, 2.75rem);
   --t-statement: clamp(2rem, 1.2rem + 3.3vw, 3.9rem);
   --t-lede: clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem);
@@ -114,7 +118,7 @@
   --sp-12: 6rem;
 
   /* Exaggerated minimalism: sections breathe. */
-  --section: clamp(6rem, 3.5rem + 9vw, 11rem);
+  --section: clamp(5rem, min(3.5rem + 9vw, 22vh), 11rem);
 
   /* Luxury motion is slow to arrive and quick to respond. */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -607,7 +611,7 @@ em.gilt,
   align-items: center;
   min-height: calc(100vh - var(--header-h));
   min-height: calc(100svh - var(--header-h));
-  padding-block: clamp(3rem, 2rem + 5vw, 6rem);
+  padding-block: clamp(2rem, 7vh, 6rem);
   overflow: hidden;
 }
 
@@ -622,7 +626,7 @@ em.gilt,
   position: relative;
   z-index: 1;
   display: grid;
-  gap: var(--sp-6);
+  gap: clamp(1.1rem, 3.2vh, 2rem);
   justify-items: start;
 }
 
@@ -681,7 +685,7 @@ em.gilt,
   display: flex;
   flex-wrap: wrap;
   gap: var(--sp-3) var(--sp-8);
-  margin-top: clamp(3rem, 2rem + 4vw, 5rem);
+  margin-top: clamp(2rem, 6vh, 5rem);
   padding-top: var(--sp-5);
   border-top: 1px solid var(--hairline);
   color: var(--faint);
@@ -698,7 +702,7 @@ em.gilt,
   }
 
   .hero-mark {
-    width: min(100%, 30rem);
+    width: min(100%, 30rem, 62vh);
     justify-self: end;
   }
 }
@@ -1417,4 +1421,232 @@ em.gilt,
 .footer--slim .footer-bottom {
   padding-top: 0;
   border-top: 0;
+}
+
+/* ---------- Language switch ---------- */
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+}
+
+.lang-switch a {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  color: var(--faint);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  transition: color var(--dur-hover) var(--ease);
+}
+
+.lang-switch a + a {
+  border-left: 1px solid var(--hairline-gold);
+}
+
+.lang-switch a[aria-current="true"] {
+  color: var(--gold);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lang-switch a:not([aria-current="true"]):hover {
+    color: var(--ink);
+  }
+}
+
+/* ---------- Project brief ----------
+
+   Sits inside the centred closing section, but reads left-aligned: a form is
+   scanned down its left edge. */
+
+.brief {
+  display: grid;
+  gap: var(--sp-8);
+  width: 100%;
+  max-width: 46rem;
+  margin-top: var(--sp-6);
+  padding: clamp(1.75rem, 1.2rem + 2.5vw, 3.25rem);
+  border: 1px solid var(--hairline-gold);
+  background: rgba(17, 16, 14, 0.72);
+  text-align: left;
+}
+
+.brief fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.brief legend,
+.brief-field > label {
+  display: block;
+  margin-bottom: var(--sp-4);
+  padding: 0;
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.brief-field > label span {
+  color: var(--faint);
+  letter-spacing: 0.1em;
+  text-transform: none;
+  font-weight: 500;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+/* Real radio inputs, visually replaced by the chip. The input stays in the
+   accessibility tree and keeps arrow-key navigation within its group. */
+.chip input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 1.1rem;
+  border: 1px solid var(--hairline-gold);
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-hover) var(--ease),
+    color var(--dur-hover) var(--ease),
+    background-color var(--dur-hover) var(--ease);
+}
+
+.chip input:checked + span {
+  border-color: var(--gold);
+  background: rgba(212, 179, 106, 0.1);
+  color: var(--ink);
+}
+
+.chip input:focus-visible + span {
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip span:hover {
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+}
+
+.brief-field input,
+.brief-field textarea {
+  display: block;
+  width: 100%;
+  min-height: 3rem;
+  padding: var(--sp-3) 0;
+  border: 0;
+  border-bottom: 1px solid var(--hairline-gold);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color var(--dur-hover) var(--ease);
+}
+
+.brief-field textarea {
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.6;
+}
+
+.brief-field input:focus,
+.brief-field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--gold);
+}
+
+.brief-field input:focus-visible,
+.brief-field textarea:focus-visible {
+  box-shadow: 0 1px 0 0 var(--gold);
+}
+
+.brief-help {
+  margin-top: var(--sp-2);
+  color: var(--faint);
+  font-size: 0.85rem;
+}
+
+.brief-error {
+  margin-top: var(--sp-2);
+  color: #f0a58a;
+  font-size: 0.9rem;
+}
+
+.brief-field textarea[aria-invalid="true"] {
+  border-bottom-color: #f0a58a;
+}
+
+.brief-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+@media (max-width: 30rem) {
+  .brief-actions .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* Direct lines, for anyone who would rather just write. */
+.direct {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 var(--sp-6);
+  margin-top: var(--sp-4);
+}
+
+.direct a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 2.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: color var(--dur-hover) var(--ease);
+}
+
+.direct b {
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .direct a:hover {
+    color: var(--ink);
+  }
+}
+
+.notfound .closing-mail a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--gold);
 }

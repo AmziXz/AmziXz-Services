@@ -42,8 +42,10 @@ node serve.js 8001
 - Anything committed here is **public**. `.claude/` and `node_modules/` are
   gitignored for that reason. `_config.yml` keeps the notes, `package.json` and
   `serve.js` from being published; add any new tooling file to its `exclude` list.
-- After changing anything in `/assets`, bump `?v=N` in **both** pages (README,
-  Cache busting). Currently `?v=2`.
+- After changing anything in `/assets`, bump `?v=N` in **all three** pages:
+  `index.html`, `lv/index.html`, `404.html` (README, Cache busting). Currently `?v=3`.
+- **English and Latvian are one page in two languages.** A change to one is a
+  change to both (README, Languages).
 - New text colours: measure contrast against `--bg`, `--bg-2` and `--surface`.
   The gold gradient is for display-size type only.
 - **Nothing goes on the page that the owner hasn't confirmed.** Recent work is

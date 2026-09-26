@@ -36,11 +36,12 @@ under GitHub Settings -> Pages -> Verified domains so that cannot happen.
 ## Structure
 
 ```
-index.html      The whole site. One page, English only.
+index.html      The whole site, in English. One page.
+lv/index.html   The same page in Latvian. Keep the two in step (see Languages)
 404.html        Not-found page
 CNAME           services.amzixz.id.lv — deleting it drops the subdomain
 robots.txt      Allows everything, points at the sitemap
-sitemap.xml     One URL
+sitemap.xml     Both languages, with hreflang pairs
 _config.yml     Keeps the notes and tooling below off the public site
 serve.js        Local preview server (mimics Pages URL handling)
 package.json    Local tooling only — never served, no build step
@@ -49,12 +50,17 @@ assets/
   style.css     Tokens, @font-face, components. One theme: black and gold
   reveal.js     Scroll reveals
   menu.js       Phone navigation menu
+  lang.js       Remembers EN/LV; copy of the main site's. Synchronous in <head>
+  brief.js      The project brief builder (see Enquiries)
   fonts/        Cormorant (display, roman + italic) + Montserrat (body), woff2,
                 latin + latin-ext
-  work-amzixz.jpg    Screenshot of amzixz.id.lv for Recent work (1440x900, dark)
+  work-amzixz.webp     Screenshot of amzixz.id.lv for Recent work (EN page)
+  work-amzixz-lv.webp  The same for amzixz.id.lv/lv/ (LV page)
   logo-full.jpg      Brand master. Every icon below is cut from this.
+  logo-mark.webp     512px monogram, hero (13 KB; the PNG is 90 KB)
+  logo-mark-192.webp Header and footer mark
   logo-mark.png      512px monogram, used in structured data
-  logo-mark-192.png  Header, favicon, apple-touch-icon
+  logo-mark-192.png  Favicon and apple-touch-icon
   logo-mark-32.png   Favicon
   og-image.jpg       1200x630 social card
 ```
@@ -90,19 +96,19 @@ Every `/assets` reference carries `?v=N`. GitHub Pages caches assets, and
 browsers hold stylesheets and images longer still, so an edited `style.css`
 without a new number leaves returning visitors on the old copy.
 
-**After changing anything in `/assets`, bump every reference in both pages:**
+**After changing anything in `/assets`, bump every reference in all three pages:**
 
 ```bash
 node --input-type=module -e "
 import {readFile,writeFile} from 'node:fs/promises';
-const V=3;
-for (const f of ['index.html','404.html'])
+const V=4;
+for (const f of ['index.html','lv/index.html','404.html'])
   await writeFile(f,(await readFile(f,'utf8')).replace(/\?v=\d+/g,'?v='+V),'utf8');
 "
-grep -ho '?v=[0-9]*' *.html | sort -u   # should print one line
+grep -ho '?v=[0-9]*' *.html lv/*.html | sort -u   # should print one line
 ```
 
-Currently `?v=2`.
+Currently `?v=3`.
 
 ## Conventions
 
@@ -129,6 +135,38 @@ Mostly the same as the main site, for the same reasons:
 `reveal.js`, `menu.js` and `serve.js` are copies of the main site's. Loading them cross-origin would add a connection to
 first paint and break this site whenever the other one moved a file. The cost is
 drift: if you fix a bug in one, fix it in the other.
+
+## Languages
+
+English at `/`, Latvian at `/lv/`. The two pages are the same page in two
+languages: same sections, same order, same `id`s, so an anchor like `#faq`
+works in both. **Change one, change the other.**
+
+- Each page declares both `hreflang` alternates plus `x-default` (English).
+  `assets/lang.js` reads those to send a returning visitor to the language
+  they last chose. It never builds a URL itself.
+- The Latvian page addresses the reader as "Jūs" (polite plural). The main
+  site's Latvian pages use the informal "tu"; a services site talking to
+  clients should not.
+- Links from Latvian pages go to the Latvian main site (`amzixz.id.lv/lv/...`).
+- Pages serves one `404.html` for the whole site, so it carries a Latvian line.
+
+## Enquiries
+
+The closing section is a brief builder (`assets/brief.js`): project type,
+timeline, optional name and a description, sent as a ready-written message.
+
+- **WhatsApp** opens `wa.me/37129351853` with the message prefilled.
+  **Email** opens a `mailto:` with subject and body. Nothing goes through a
+  server or a third party.
+- All wording comes from `data-` attributes on the `<form>`, so a translation
+  never touches the script.
+- Without JavaScript it still works: the form is a GET to `wa.me` with the
+  textarea named `text` (the parameter WhatsApp prefills). Never name a field
+  `type`, because wa.me uses that itself.
+- Do not pass `"noopener"` to `window.open` there. With it the call always
+  returns `null`, and the fallback then navigates the visitor away from their
+  brief. The comment in the script explains the pattern that works.
 
 ## Pricing
 
