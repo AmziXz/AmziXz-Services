@@ -59,7 +59,7 @@ npm run check   # translation files: same keys, same list lengths
   (`package.json`, `serve.js`, `check.js`) from being published; add any new
   tooling file to its `exclude` list.
 - After changing anything in `/assets`, add one to `asset_version` in
-  `_config.yml`. Every page follows. Currently `4`.
+  `_config.yml`. Every page follows. Currently `5`.
 - Run `npm run check`, and build once with real Jekyll if you changed the
   template: the preview matches it, but GitHub is the one that publishes.
 - New text colours: measure contrast against `--bg`, `--bg-2` and `--surface`.
