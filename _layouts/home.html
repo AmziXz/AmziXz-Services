@@ -208,9 +208,12 @@
         </div>
       </section>
 
+      <!-- Menu targets (id="services" and the rest) sit on each section's .wrap,
+           not on the <section>: the section's top padding is breathing room,
+           and landing on it put 150-200px of empty band under the header. -->
       <!-- Services: an editorial index; every row leads to the enquiry. -->
-      <section class="section" id="services" aria-labelledby="services-title">
-        <div class="wrap">
+      <section class="section" aria-labelledby="services-title">
+        <div class="wrap" id="services">
           <div class="section-head section-head--split">
             <div>
               <p class="label label--rule" data-reveal>{{ t.services.label | escape }}</p>
@@ -235,8 +238,8 @@
       </section>
 
       <!-- Recent work: only what is live and can be checked. -->
-      <section class="section section--alt" id="work" aria-labelledby="work-title">
-        <div class="wrap">
+      <section class="section section--alt" aria-labelledby="work-title">
+        <div class="wrap" id="work">
           <div class="section-head">
             <p class="label label--rule" data-reveal>{{ t.work.label | escape }}</p>
             <h2 class="section-title" id="work-title" data-reveal>
@@ -272,8 +275,8 @@
       </section>
 
       <!-- Process -->
-      <section class="section" id="process" aria-labelledby="process-title">
-        <div class="wrap">
+      <section class="section" aria-labelledby="process-title">
+        <div class="wrap" id="process">
           <div class="section-head section-head--split">
             <div>
               <p class="label label--rule" data-reveal>{{ t.process.label | escape }}</p>
@@ -297,8 +300,8 @@
       </section>
 
       <!-- Engagements: shapes, not prices. See README "Pricing". -->
-      <section class="section section--alt" id="engagements" aria-labelledby="engagements-title">
-        <div class="wrap">
+      <section class="section section--alt" aria-labelledby="engagements-title">
+        <div class="wrap" id="engagements">
           <div class="section-head section-head--split">
             <div>
               <p class="label label--rule" data-reveal>{{ t.engagements.label | escape }}</p>
@@ -331,8 +334,8 @@
       </section>
 
       <!-- FAQ -->
-      <section class="section" id="faq" aria-labelledby="faq-title">
-        <div class="wrap faq-grid">
+      <section class="section" aria-labelledby="faq-title">
+        <div class="wrap faq-grid" id="faq">
           <div class="section-head">
             <p class="label label--rule" data-reveal>{{ t.faq.label | escape }}</p>
             <h2 class="section-title" id="faq-title" data-reveal>
@@ -352,8 +355,8 @@
       </section>
 
       <!-- Closing call to action: the brief builder (assets/brief.js). -->
-      <section class="closing" id="contact" aria-labelledby="contact-title">
-        <div class="wrap">
+      <section class="closing" aria-labelledby="contact-title">
+        <div class="wrap" id="contact">
           <p class="label" data-reveal>{{ t.contact.label | escape }}</p>
           <h2 id="contact-title" data-reveal>{{ t.contact.title | escape }} <em class="gilt">{{ t.contact.title_accent | escape }}</em></h2>
           <p class="lede" data-reveal>{{ t.contact.lede | escape }}</p>

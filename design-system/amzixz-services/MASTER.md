@@ -122,6 +122,26 @@ laptop: 1536x700 (1920x1080 at 125% Windows scaling), 1366x625 and 1280x590.
 It only fit on a 1920x1080 screen at 100%. Test the fold at those sizes, in
 both languages; Latvian runs longer.
 
+The same applies **inside** sections (2026-09-26). A menu link jumps to a
+section, and the owner expects to land on it, not on padding:
+
+- **Menu targets sit on each section's `.wrap`**, not on the `<section>`.
+  Landing on the section put its top padding, 160-210px of empty band, under
+  the header. Now the label lands about 20px below the header.
+- **Spacing inside sections is height-aware too**: `--head-gap`, `--row-pad`,
+  the tier and fact gaps, and the service titles all take `min()` of a width
+  value and a height value.
+- **The Work screenshot crops from the bottom** on a short window
+  (`max-height` + `object-fit: cover; object-position: top`) and shows whole
+  on a tall one.
+
+Measured after the change, landing via the menu: every section except the
+contact form fits on one screen at 1536x700, 1440x780 and 1920x950 in both
+languages. At 1366x625 the one miss is the last 6px of the Latvian Engagements
+footnote. The contact form (about 900px) cannot fit any of these; it lands
+with the heading and the first question visible. Phones scroll, as they
+should.
+
 ## Anti-patterns for this site
 
 - A second accent colour, or a light theme.

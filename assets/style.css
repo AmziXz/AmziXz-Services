@@ -101,7 +101,7 @@
      scaling (a 1536x700 viewport), which pushed the call to action below the
      fold on every common laptop. min() takes whichever is smaller. */
   --t-hero: clamp(2.75rem, min(1.3rem + 7vw, 1rem + 10.5vh), 8rem);
-  --t-h2: clamp(2.4rem, min(1.6rem + 4vw, 1rem + 7vh), 5.25rem);
+  --t-h2: clamp(2.4rem, min(1.6rem + 4vw, 1rem + 6vh), 5.25rem);
   --t-h3: clamp(1.8rem, 1.35rem + 1.7vw, 2.75rem);
   --t-statement: clamp(2rem, 1.2rem + 3.3vw, 3.9rem);
   --t-lede: clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem);
@@ -118,7 +118,13 @@
   --sp-12: 6rem;
 
   /* Exaggerated minimalism: sections breathe. */
-  --section: clamp(5rem, min(3.5rem + 9vw, 22vh), 11rem);
+  --section: clamp(4rem, min(3.5rem + 9vw, 16vh), 11rem);
+
+  /* Space inside a section, also height-aware: on a short window the
+     heading, its content and the gaps between must fit on one screen when a
+     menu link jumps there. Measured targets: 1536x700 (1920x1080 at 125%). */
+  --head-gap: clamp(1.5rem, min(2rem + 4vw, 5.5vh), 6rem);
+  --row-pad: clamp(1.1rem, min(1.5rem + 1.5vw, 3vh), 3rem);
 
   /* Luxury motion is slow to arrive and quick to respond. */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -151,7 +157,7 @@ html {
   background: var(--bg);
   /* Anchor jumps land below the sticky header, and keyboard focus is never
      hidden behind it (WCAG 2.2, 2.4.11). */
-  scroll-padding-top: calc(var(--header-h) + var(--sp-5));
+  scroll-padding-top: calc(var(--header-h) + var(--sp-4));
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -306,8 +312,8 @@ em.gilt,
 
 .section-head {
   display: grid;
-  gap: var(--sp-5);
-  margin-bottom: clamp(3.5rem, 2rem + 4vw, 6rem);
+  gap: clamp(0.75rem, 2.4vh, 1.5rem);
+  margin-bottom: var(--head-gap);
 }
 
 @media (min-width: 60rem) {
@@ -833,9 +839,20 @@ em.gilt,
   height: auto;
 }
 
+/* Beside the text on wide screens, the screenshot is cropped from the bottom
+   to what fits under the heading on a short window; its top (the part worth
+   seeing) always shows. On a tall window it shows whole. */
+@media (min-width: 60rem) {
+  .frame img {
+    max-height: max(16rem, calc(100vh - var(--header-h) - 20rem));
+    object-fit: cover;
+    object-position: top;
+  }
+}
+
 .work-body {
   display: grid;
-  gap: var(--sp-5);
+  gap: clamp(0.75rem, 2.2vh, 1.5rem);
   justify-items: start;
 }
 
@@ -857,7 +874,7 @@ em.gilt,
   display: flex;
   justify-content: space-between;
   gap: var(--sp-5);
-  padding-block: var(--sp-3);
+  padding-block: clamp(0.45rem, 1.4vh, 0.75rem);
   border-bottom: 1px solid var(--hairline);
   font-size: 0.9rem;
 }
@@ -892,7 +909,7 @@ em.gilt,
   position: relative;
   display: grid;
   gap: var(--sp-3) var(--sp-8);
-  padding-block: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  padding-block: var(--row-pad);
   border-bottom: 1px solid var(--hairline);
   text-decoration: none;
 }
@@ -918,7 +935,7 @@ em.gilt,
 }
 
 .index-row h3 {
-  font-size: clamp(2.2rem, 1.5rem + 2.6vw, 3.75rem);
+  font-size: clamp(2rem, min(1.5rem + 2.6vw, 1rem + 5vh), 3.75rem);
   font-weight: 300;
   transition: transform var(--dur-hover) var(--ease);
 }
@@ -945,7 +962,7 @@ em.gilt,
 
 @media (min-width: 60rem) {
   .index-row {
-    grid-template-columns: 4rem 5fr 5fr 7rem;
+    grid-template-columns: 4rem 4fr 6fr 7rem;
     align-items: baseline;
   }
 
@@ -1032,8 +1049,8 @@ em.gilt,
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--sp-5);
-  padding: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  gap: clamp(0.75rem, 2vh, 1.5rem);
+  padding: var(--row-pad) clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
   border: 1px solid var(--hairline);
   background: var(--bg);
 }
@@ -1048,7 +1065,7 @@ em.gilt,
 .tier-flag {
   position: absolute;
   top: -0.75rem;
-  left: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+  left: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
   padding: 0.25rem 0.75rem;
   background: var(--gold-grad);
   color: var(--bg);
@@ -1065,7 +1082,7 @@ em.gilt,
 .tier-price {
   display: grid;
   gap: var(--sp-1);
-  padding-bottom: var(--sp-5);
+  padding-bottom: clamp(0.85rem, 2.4vh, 1.5rem);
   border-bottom: 1px solid var(--hairline);
   font-family: var(--serif);
   font-size: 1.6rem;
@@ -1079,11 +1096,12 @@ em.gilt,
   font-family: var(--sans);
   font-size: 0.85rem;
   font-style: normal;
+  line-height: 1.45;
 }
 
 .ticks {
   display: grid;
-  gap: var(--sp-3);
+  gap: clamp(0.4rem, 1.2vh, 0.75rem);
   flex: 1;
 }
 
@@ -1093,13 +1111,14 @@ em.gilt,
   gap: var(--sp-3);
   color: var(--muted);
   font-size: 0.95rem;
+  line-height: 1.55;
 }
 
 .ticks li::before {
   content: "";
   width: 0.55rem;
   height: 1px;
-  margin-top: 0.85rem;
+  margin-top: 0.75rem;
   background: var(--gold);
 }
 
@@ -1108,7 +1127,8 @@ em.gilt,
 }
 
 .tiers-note {
-  margin-top: var(--sp-8);
+  margin-top: clamp(0.85rem, 2vh, 3rem);
+  line-height: 1.5;
   color: var(--faint);
   font-size: 0.95rem;
   text-align: center;
@@ -1375,7 +1395,7 @@ em.gilt,
 
 .section-head--split .label + .section-title,
 .label + .statement {
-  margin-top: var(--sp-6);
+  margin-top: clamp(1rem, 3.2vh, 2rem);
 }
 
 .frame {

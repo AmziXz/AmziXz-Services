@@ -197,7 +197,7 @@ stylesheets and images longer still, so an edited `style.css` without a new
 number leaves returning visitors on the old copy.
 
 **After changing anything in `/assets`, add one to `asset_version`.** Every
-page follows. Currently `4`.
+page follows. Currently `5`.
 
 ## Conventions
 
@@ -218,6 +218,13 @@ Mostly the same as the main site, for the same reasons:
   that shows the links inline when the menu button cannot work.
 - **Links to the main site are absolute** (`https://amzixz.id.lv/...`). It is a
   different origin; `/ventures` would resolve to this site and 404.
+- **Menu targets (`id="services"`, `#work`, …) are on each section's `.wrap`,
+  not the `<section>`.** On the section, a menu click landed on 150-200px of
+  top padding. Keep new section ids on the `.wrap`.
+- **Vertical spacing follows the window height as well as the width**
+  (`min()`), so a section fits one screen after a menu jump on a laptop.
+  Check a change at 1536x700 (1920x1080 at 125%) in both languages
+  (MASTER.md, "Height, not just width").
 
 ## Shared with the main site, copied not linked
 
