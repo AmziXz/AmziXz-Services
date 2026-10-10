@@ -70,3 +70,5 @@ npm run check   # translation files: same keys, same list lengths
 - **Nothing goes on the page that the owner hasn't confirmed.** Recent work is
   live, confirmed and defensible, or it is not there. See MASTER.md, "Content
   rule", for what is being held back and why.
+- Commit messages and pull request descriptions never include a link to the
+  Claude session.
