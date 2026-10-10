@@ -536,12 +536,12 @@ ol {
   line-height: 1;
 }
 
+/* Always "AmziXz", exactly as the owner writes it: never set in capitals. */
 .brand-name {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-stretch: var(--wide);
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
 .brand-sub {
@@ -2033,12 +2033,11 @@ ol {
 /* The name, as wide as the page. */
 .wordmark {
   margin-block: clamp(2rem, 6vh, 4rem) var(--sp-5);
-  font-size: min(17.6vw, 17rem);
+  font-size: min(24vw, 23rem);
   font-stretch: var(--wide);
   font-weight: 200;
   line-height: 0.78;
   letter-spacing: -0.02em;
-  text-transform: uppercase;
   white-space: nowrap;
   background: var(--gilt);
   -webkit-background-clip: text;

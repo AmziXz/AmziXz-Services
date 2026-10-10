@@ -188,6 +188,8 @@ git history.
 
 ## Anti-patterns for this site
 
+- The name in capitals. It is always written **AmziXz** (owner, 2026-10-10),
+  so nothing that shows it may use `text-transform: uppercase`.
 - Gold text on a light page (use `--accent`, which is bronze there).
 - `--gilt` on body-size text.
 - Rounded "friendly SaaS" cards or soft drop shadows on cards (controls are
