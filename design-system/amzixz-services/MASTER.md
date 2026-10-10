@@ -39,8 +39,10 @@ right. Version 3 changes the whole look.
   without taking over the scroll wheel (see Overrides).
 - **The hero** is the one bold place. A light room (periwinkle with three soft
   pools of light that drift with the pointer), one headline in expanded
-  capitals fitted to the full width, each line justified edge to edge, and the
-  gold AX monogram behind the words as a solid object: twelve stacked copies
+  capitals fitted to the full width, each line justified edge to edge ("You
+  ask, / we deliver.", the owner's wording of 2026-10-10), and the gold AX
+  monogram in the open space between the words (measured by `stage.js`, so
+  it follows any wording or language) as a solid object: twelve stacked copies
   of a transparent cut-out, so it has thickness when it turns. It turns and
   drifts towards the mouse with some weight (eased, not snapped), and a
   highlight slides across its face. On touch screens it turns slowly by
@@ -71,8 +73,14 @@ so it works on either.
 Contrast is measured against each theme's `--bg` (and `--surface`, where it
 is higher). Gold text is never used on the light theme: there it is bronze.
 
-The primary button is ink on light pages and the gold gradient on dark ones;
-both fill with gold from the left on hover.
+**Buttons are pills** (after the owner's Pangram reference, 2026-10-10: the
+square, gold-edged buttons were the most visible leftover of version 2). The
+main action is solid: ink on a light page, paper on a dark one. The other is
+an outline in the text colour, not gold. On hover a fill swells from the
+middle: gold for the main action, ink for the outline. Gold appears when you
+reach for it. Chips, the language button and the "Most requested" flag are
+pills too; the menu button is round. Cards stay square: controls are round,
+surfaces are not.
 
 **Type:** Mona Sans (GitHub, OFL), variable in weight (200–900) and width
 (75–125%). Headlines: 125% width, weight 300, capitals. Reading text: 100%
@@ -152,7 +160,7 @@ held back:
 ## Height, not just width (2026-09-26, still true)
 
 Display sizes use `min()` of a width-based and a height-based value, and the
-hero headline is capped at 16% of the window height when it is fitted. Width
+hero headline is capped at 20% of the window height when it is fitted. Width
 alone put the hero call to action below the fold on every common laptop:
 1536x700 (1920x1080 at 125% Windows scaling), 1366x625 and 1280x590. Test the
 fold at those sizes, in both languages; Latvian runs longer.
@@ -182,7 +190,9 @@ git history.
 
 - Gold text on a light page (use `--accent`, which is bronze there).
 - `--gilt` on body-size text.
-- Rounded "friendly SaaS" cards or soft drop shadows on cards.
+- Rounded "friendly SaaS" cards or soft drop shadows on cards (controls are
+  pills; surfaces stay square).
+- Gold outlines on buttons (the version 2 look).
 - Emoji as icons.
 - Scroll-jacking, or motion that ignores `prefers-reduced-motion`.
 - Any claim about a project that the owner has not confirmed.

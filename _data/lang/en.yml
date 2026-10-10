@@ -3,7 +3,7 @@
 # HOW TO EDIT
 #   Change the text between the double quotes. Leave everything else alone.
 #
-#     title: "Websites and apps,"        <- change this part
+#     title: "You ask,"                  <- change this part
 #     ^^^^^                                  never this part (the key)
 #
 #   - Keep the double quotes around every text.
@@ -48,8 +48,8 @@ nav:
 
 hero:
   label: "Websites & applications"
-  title: "Websites and apps,"
-  title_accent: "made to measure."
+  title: "You ask,"
+  title_accent: "we deliver."
   lede: "Built to your brief, at a price fixed before we start, and handed over with every line of source. No templates. No monthly lock-in."
   cta: "Request a quote"
   secondary: "What we make"

@@ -95,7 +95,10 @@
   function fit() {
     if (!title) return;
     title.style.fontSize = "";
-    if (!fitWide.matches) return;
+    if (!fitWide.matches) {
+      placeMark();
+      return;
+    }
     var lines = title.querySelectorAll(".line-in");
     var base = parseFloat(window.getComputedStyle(title).fontSize);
     var widest = 0;
@@ -106,8 +109,53 @@
     title.classList.remove("is-measuring");
     if (!widest) return;
     var size = (base * title.clientWidth) / widest;
-    size = Math.min(size * 0.995, window.innerHeight * 0.16, 200);
+    size = Math.min(size * 0.995, window.innerHeight * 0.2, 240);
     title.style.fontSize = size.toFixed(2) + "px";
+    placeMark();
+  }
+
+  /* Justified lines open up between their words. Put the monogram in the
+     space that is open on every line, so it sits between the words rather
+     than on them, whatever the wording or language. If there is no such
+     space, it keeps its place from the stylesheet. */
+  function placeMark() {
+    var box = title.parentNode;
+    var markEl = box.querySelector(".mark");
+    if (!markEl) return;
+    markEl.style.left = "";
+    if (!fitWide.matches) return;
+    var frame = box.getBoundingClientRect();
+    var scale = frame.width / box.offsetWidth || 1;
+    var open = null;
+    var lines = title.querySelectorAll(".line-in");
+    for (var i = 0; i < lines.length; i++) {
+      var node = lines[i].firstChild;
+      if (!node || node.nodeType !== 3) return;
+      var text = node.nodeValue;
+      var words = [];
+      var re = /\S+/g;
+      var m;
+      while ((m = re.exec(text))) {
+        var range = document.createRange();
+        range.setStart(node, m.index);
+        range.setEnd(node, m.index + m[0].length);
+        var r = range.getBoundingClientRect();
+        words.push({ left: (r.left - frame.left) / scale, right: (r.right - frame.left) / scale });
+      }
+      /* The widest gap on this line. */
+      var best = null;
+      for (var w = 1; w < words.length; w++) {
+        var gap = { left: words[w - 1].right, right: words[w].left };
+        if (!best || gap.right - gap.left > best.right - best.left) best = gap;
+      }
+      if (!best) return;
+      open = open
+        ? { left: Math.max(open.left, best.left), right: Math.min(open.right, best.right) }
+        : best;
+    }
+    if (!open || open.right - open.left < markEl.offsetWidth * 0.5) return;
+    var centre = (open.left + open.right) / 2;
+    markEl.style.left = (centre - markEl.offsetWidth / 2).toFixed(1) + "px";
   }
 
   /* ---------- Scroll ---------- */

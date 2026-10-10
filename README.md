@@ -193,8 +193,8 @@ as you scroll. The first screen is light, with one huge expanded headline
 across the width and the gold AX monogram as a solid 3D object behind it that
 turns and drifts with the mouse; rulers and an x/y readout measure the pointer
 ("made to measure"). One type family, Mona Sans, with its width axis doing the
-work; JetBrains Mono only for code-like details. Square corners, hairlines,
-gold as the one accent.
+work; JetBrains Mono only for code-like details. Pill-shaped buttons, square
+cards, hairlines, gold as the one accent.
 
 ## Cache busting
 
@@ -204,7 +204,7 @@ stylesheets and images longer still, so an edited `style.css` without a new
 number leaves returning visitors on the old copy.
 
 **After changing anything in `/assets`, add one to `asset_version`.** Every
-page follows. Currently `6`.
+page follows. Currently `7`.
 
 ## Conventions
 

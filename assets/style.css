@@ -88,7 +88,7 @@
      chapter fits a 1536x700 laptop window (1920x1080 at 125%) after a menu
      jump. The hero headline is fitted to the width by assets/stage.js; this
      is its size before that, and without script. */
-  --t-hero: clamp(2.2rem, min(10.4vw, 1rem + 11vh), 8.5rem);
+  --t-hero: clamp(2.2rem, min(12vw, 1rem + 13vh), 10rem);
   --t-h2: clamp(1.9rem, min(0.9rem + 3.6vw, 0.9rem + 5.8vh), 4.75rem);
   --t-statement: clamp(1.75rem, min(1rem + 2.6vw, 0.8rem + 4.6vh), 3.6rem);
   --t-row: clamp(1.9rem, min(1rem + 3.6vw, 0.6rem + 6.5vh), 5.5rem);
@@ -138,8 +138,6 @@
   --error: #9a2f12;
   --btn-bg: #0e0f13;
   --btn-ink: #eef0f6;
-  --btn-fill: var(--gold-grad);
-  --btn-fill-ink: #0e0f13;
   --halo: rgba(255, 255, 255, 0.7);
   --shade: rgba(40, 44, 70, 0.28);
   color-scheme: light;
@@ -160,10 +158,8 @@
   --wash: rgba(212, 179, 106, 0.08);
   --glass: rgba(15, 15, 18, 0.84);
   --error: #f0a58a;
-  --btn-bg: var(--gold-grad);
+  --btn-bg: #eef0f6;
   --btn-ink: #0f0f12;
-  --btn-fill: var(--gold-grad);
-  --btn-fill-ink: #0f0f12;
   --halo: rgba(212, 179, 106, 0.18);
   --shade: rgba(0, 0, 0, 0);
   color-scheme: dark;
@@ -378,7 +374,12 @@ ol {
   }
 }
 
-/* ---------- Buttons and links ---------- */
+/* ---------- Buttons and links ----------
+
+   Pills, after the owner's Pangram reference. The main action is solid (ink
+   on a light page, paper on a dark one); the other is an outline in the text
+   colour. On hover a fill swells out from the middle: gold for the main
+   action, ink for the outline. Gold appears when you reach for it. */
 
 .btn {
   position: relative;
@@ -387,41 +388,43 @@ ol {
   justify-content: center;
   gap: var(--sp-3);
   min-height: 3.25rem;
-  padding: 0 1.75rem;
-  border: 1px solid var(--accent);
-  border-radius: 0;
+  padding: 0 1.65rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
   background: transparent;
-  color: var(--accent);
+  color: var(--ink);
   font-family: var(--sans);
-  font-size: 0.8125rem;
-  font-stretch: var(--wide);
-  font-weight: 560;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 0.9375rem;
+  font-stretch: var(--semi);
+  font-weight: 520;
+  letter-spacing: 0;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
   overflow: hidden;
   isolation: isolate;
   transition:
-    color var(--dur-hover) var(--ease),
+    color 360ms var(--ease),
+    border-color 360ms var(--ease),
     transform var(--dur-press) var(--ease);
 }
 
 .btn:active {
-  transform: scale(0.985);
+  transform: scale(0.97);
 }
 
-/* The fill wipes in from the left on hover. */
 .btn::before {
   content: "";
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
   z-index: -1;
-  background: var(--btn-fill);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--dur-hover) var(--ease);
+  width: 112%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 520ms var(--ease);
 }
 
 .btn--primary {
@@ -430,23 +433,27 @@ ol {
   color: var(--btn-ink);
 }
 
-[data-theme="dark"] .btn--primary::before {
-  background: var(--gold-bright);
+.btn--primary::before {
+  background: var(--gold-grad);
 }
 
 .btn--sm {
   min-height: 2.75rem;
   padding: 0 1.2rem;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .btn:hover {
-    color: var(--btn-fill-ink);
+    color: var(--bg);
+  }
+
+  .btn--primary:hover {
+    color: #0e0f13;
   }
 
   .btn:hover::before {
-    transform: scaleX(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
@@ -456,11 +463,9 @@ ol {
   gap: var(--sp-3);
   min-height: 2.75rem;
   color: var(--ink);
-  font-size: 0.8125rem;
-  font-stretch: var(--wide);
-  font-weight: 560;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 0.9375rem;
+  font-stretch: var(--semi);
+  font-weight: 520;
   text-decoration: none;
 }
 
@@ -616,6 +621,7 @@ ol {
   height: 2.75rem;
   padding: 0;
   border: 1px solid var(--line-strong);
+  border-radius: 50%;
   background: transparent;
   color: var(--ink);
   cursor: pointer;
@@ -1044,7 +1050,7 @@ ol {
 
   /* Between the lines, a little right of centre, crossing both. */
   .mark {
-    --mw: min(27vw, 46vh, 30rem);
+    --mw: min(25vw, 46vh, 30rem);
     position: absolute;
     order: 0;
     left: calc(57% - var(--mw) / 2);
@@ -1558,7 +1564,8 @@ ol {
   position: absolute;
   top: -0.8rem;
   left: clamp(1.25rem, 1rem + 1.2vw, 2.25rem);
-  padding: 0.2rem 0.65rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
   background: var(--gold-grad);
   color: #0f0f12;
   font-family: var(--mono);
@@ -1785,8 +1792,9 @@ ol {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  padding: 0 1rem;
+  padding: 0 1.1rem;
   border: 1px solid var(--line-strong);
+  border-radius: 999px;
   color: var(--muted);
   font-size: 0.925rem;
   cursor: pointer;
@@ -2120,8 +2128,9 @@ ol {
   gap: 0.45rem;
   min-width: 2.75rem;
   min-height: 2.75rem;
-  padding: 0 0.7rem;
+  padding: 0 0.85rem;
   border: 1px solid var(--line-strong);
+  border-radius: 999px;
   color: var(--ink);
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -2164,7 +2173,9 @@ ol {
   min-width: 12rem;
   padding: var(--sp-2) 0;
   border: 1px solid var(--line-strong);
+  border-radius: 0.875rem;
   background: var(--surface);
+  overflow: hidden;
   box-shadow: 0 24px 48px -24px rgba(8, 9, 14, 0.5);
 }
 

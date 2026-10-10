@@ -3,7 +3,7 @@
 # KĀ LABOT
 #   Mainiet tekstu starp pēdiņām. Visu pārējo atstājiet, kā ir.
 #
-#     title: "Mājaslapas un lietotnes,"   <- mainiet šo daļu
+#     title: "Jūs prasāt,"                <- mainiet šo daļu
 #     ^^^^^                                   nekad šo (atslēgu)
 #
 #   - Katram tekstam jāpaliek pēdiņās "…".
@@ -48,8 +48,8 @@ nav:
 
 hero:
   label: "Izstrāde pēc pasūtījuma"
-  title: "Mājaslapas un lietotnes,"
-  title_accent: "darinātas pēc mēra."
+  title: "Jūs prasāt,"
+  title_accent: "mēs paveicam."
   lede: "Izstrādājam pēc Jūsu uzdevuma, par cenu, par kuru vienojamies pirms darba sākuma, un nododam kopā ar visu pirmkodu. Bez veidnēm. Bez ikmēneša saistībām."
   cta: "Pieprasīt piedāvājumu"
   secondary: "Ko mēs veidojam"
