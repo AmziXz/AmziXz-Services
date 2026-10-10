@@ -7,14 +7,17 @@
   break the markup. _config.yml turns on strict variables: a key missing from
   a translation fails the build, and GitHub keeps the previous version live,
   instead of publishing a blank.
+
+  The page is a run of full-screen chapters (class "chapter"). On a wide
+  screen assets/stage.js lets each one slide over the last as you scroll, and
+  turns the gold monogram in the hero towards the pointer. Without the script
+  every chapter is an ordinary section and the monogram stands still.
 {%- endcomment -%}
 {%- assign t = site.data.lang[page.lang] -%}
 {%- assign c = site.data.contact -%}
 {%- assign langs = site.data.languages -%}
 {%- for l in langs -%}{%- if l.code == page.lang -%}{%- assign here = l -%}{%- endif -%}{%- endfor -%}
-{%- assign upper = "I.,II.,III.,IV.,V.,VI.,VII.,VIII." | split: "," -%}
-{%- assign lower = "i.,ii.,iii.,iv.,v.,vi.,vii.,viii." | split: "," -%}
-{%- assign plain = "I,II,III,IV,V,VI,VII,VIII" | split: "," -%}
+{%- assign v = site.asset_version -%}
 <!DOCTYPE html>
 <html lang="{{ here.code }}">
   <head>
@@ -27,10 +30,10 @@
     <link rel="alternate" hreflang="{{ l.code }}" href="{{ site.origin }}{{ l.path }}" />
 {%- endfor %}
     <link rel="alternate" hreflang="x-default" href="{{ site.origin }}{{ langs.first.path }}" />
-    <link rel="icon" href="/assets/logo-mark-32.png?v={{ site.asset_version }}" sizes="32x32" type="image/png" />
-    <link rel="icon" href="/assets/logo-mark-192.png?v={{ site.asset_version }}" sizes="192x192" type="image/png" />
-    <link rel="apple-touch-icon" href="/assets/logo-mark-192.png?v={{ site.asset_version }}" />
-    <meta name="theme-color" content="#11100e" />
+    <link rel="icon" href="/assets/logo-mark-32.png?v={{ v }}" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/assets/logo-mark-192.png?v={{ v }}" sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo-mark-192.png?v={{ v }}" />
+    <meta name="theme-color" content="#d4d9e9" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="AmziXz Services" />
@@ -41,23 +44,24 @@
     <meta property="og:title" content="{{ t.meta.title | escape }}" />
     <meta property="og:description" content="{{ t.meta.share_description | escape }}" />
     <meta property="og:url" content="{{ site.origin }}{{ here.path }}" />
-    <meta property="og:image" content="{{ site.origin }}/assets/og-image.jpg?v={{ site.asset_version }}" />
+    <meta property="og:image" content="{{ site.origin }}/assets/og-image.jpg?v={{ v }}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="{{ t.meta.share_image_alt | escape }}" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="preload" href="/assets/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/assets/fonts/cormorant-italic-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/mona-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/mark.webp?v={{ v }}" as="image" type="image/webp" fetchpriority="high" />
 
+    <!-- Lets the stylesheet tell "script will run" from "no script". -->
+    <script>document.documentElement.classList.add("js");</script>
     <!-- Not deferred: sends a returning visitor to the language they chose
          before anything paints. Reads the hreflang links above. -->
-    <script src="/assets/lang.js?v={{ site.asset_version }}"></script>
-    <script src="/assets/reveal.js?v={{ site.asset_version }}" defer></script>
-    <script src="/assets/menu.js?v={{ site.asset_version }}" defer></script>
-    <script src="/assets/brief.js?v={{ site.asset_version }}" defer></script>
-    <link rel="stylesheet" href="/assets/style.css?v={{ site.asset_version }}" />
+    <script src="/assets/lang.js?v={{ v }}"></script>
+    <script src="/assets/menu.js?v={{ v }}" defer></script>
+    <script src="/assets/stage.js?v={{ v }}" defer></script>
+    <script src="/assets/brief.js?v={{ v }}" defer></script>
+    <link rel="stylesheet" href="/assets/style.css?v={{ v }}" />
     <!-- Without JavaScript the menu button can never open, so show the links. -->
     <noscript>
       <style>
@@ -66,7 +70,9 @@
           .header-inner { flex-wrap: wrap; }
           .header-nav { order: 3; width: 100%; }
           .nav { display: flex !important; position: static !important; flex-direction: row !important; flex-wrap: wrap; gap: 0 1.25rem !important; padding: 0 0 0.5rem !important; border: 0 !important; background: none !important; }
-          .nav a { border: 0 !important; font-size: 1.25rem !important; min-height: 2.75rem !important; }
+          .nav a { border: 0 !important; font-size: 1rem !important; min-height: 2.75rem !important; }
+          .header { position: sticky; }
+          .hero { padding-top: 0; }
         }
       </style>
     </noscript>
@@ -98,10 +104,10 @@
   <body>
     <a class="skip" href="#main">{{ t.ui.skip | escape }}</a>
 
-    <header class="header">
+    <header class="header" data-theme="light">
       <div class="wrap header-inner">
         <a class="brand" href="{{ here.path }}">
-          <img src="/assets/logo-mark-192.webp?v={{ site.asset_version }}" alt="" width="44" height="44" />
+          <img src="/assets/mark.webp?v={{ v }}" alt="" width="556" height="488" />
           <span class="brand-text">
             <span class="brand-name">AmziXz</span>
             <span class="brand-sub">Services</span>
@@ -161,45 +167,76 @@
           </button>
         </div>
       </div>
+      <!-- How far down the page you are. Filled by assets/stage.js. -->
+      <div class="progress" aria-hidden="true"><span></span></div>
     </header>
 
     <main id="main">
-      <!-- Hero -->
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="wrap">
-          <div class="hero-grid">
-            <div class="hero-copy">
-              <p class="label label--rule" data-reveal>{{ t.hero.label | escape }}</p>
-              <h1 id="hero-title" data-reveal>{{ t.hero.title | escape }} <em class="gilt">{{ t.hero.title_accent | escape }}</em></h1>
-              <p class="lede" data-reveal>{{ t.hero.lede | escape }}</p>
-              <div class="hero-actions" data-reveal>
-                <a class="btn btn--gold" href="#contact">{{ t.hero.cta | escape }}</a>
-                <a class="arrow-link" href="#services">{{ t.hero.secondary | escape }}</a>
+      <!-- Hero. A light page: the headline fills the width, with the gold
+           monogram turning behind its words. The stage is decoration only: a
+           soft light that drifts with the pointer, and rulers that measure it.
+           The monogram's layers are copies of one image (one download),
+           stacked in depth so it shows a thickness when it turns. -->
+      <section class="chapter hero" data-theme="light" aria-labelledby="hero-title">
+        <div class="hero-stage" aria-hidden="true">
+          <div class="aura"><i></i><i></i><i></i></div>
+          <div class="ruler ruler--x"><i></i></div>
+          <div class="ruler ruler--y"><i></i></div>
+        </div>
+
+        <div class="wrap chapter-inner hero-inner">
+          <div class="hero-top">
+            <p class="note">{{ t.hero.label | escape }}</p>
+            <p class="readout" aria-hidden="true"><span>x</span> <b data-readout="x">0000</b> <span>y</span> <b data-readout="y">0000</b></p>
+          </div>
+
+          <div class="hero-main">
+            <h1 class="hero-title" id="hero-title">
+              <span class="line"><span class="line-in">{{ t.hero.title | escape }}</span></span>
+              <span class="line"><span class="line-in">{{ t.hero.title_accent | escape }}</span></span>
+            </h1>
+            <div class="mark" aria-hidden="true" style="--mark-img: url('/assets/mark.webp?v={{ v }}')">
+              <div class="mark-glow"></div>
+              <div class="mark-body">
+{%- for i in (1..12) %}
+                <img class="mark-layer" src="/assets/mark.webp?v={{ v }}" alt="" width="556" height="488" style="--i: {{ 12 | minus: i }}"{% if i == 12 %} fetchpriority="high"{% endif %} />
+{%- endfor %}
+                <div class="mark-sheen"></div>
               </div>
             </div>
-            <div class="hero-mark" data-reveal>
-              <img src="/assets/logo-mark.webp?v={{ site.asset_version }}" alt="" width="512" height="512" fetchpriority="high" />
+          </div>
+
+          <div class="hero-bottom">
+            <div class="hero-actions">
+              <a class="btn btn--primary" href="#contact">{{ t.hero.cta | escape }}</a>
+              <a class="arrow-link" href="#services">{{ t.hero.secondary | escape }}</a>
+            </div>
+            <p class="scroll-cue" aria-hidden="true">
+              <span>{{ t.ui.scroll | escape }}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+            </p>
+            <div class="hero-aside">
+              <p class="lede">{{ t.hero.lede | escape }}</p>
+              <ul class="hero-facts">
+{%- for f in t.hero.facts %}
+                <li>{{ f | escape }}</li>
+{%- endfor %}
+              </ul>
             </div>
           </div>
-          <ul class="hero-foot" data-reveal>
-{%- for f in t.hero.facts %}
-            <li>{{ f | escape }}</li>
-{%- endfor %}
-          </ul>
         </div>
       </section>
 
-      <!-- Principles -->
-      <section class="section section--alt" aria-labelledby="standard-title">
-        <div class="wrap">
-          <p class="label label--rule" data-reveal>{{ t.standard.label | escape }}</p>
-          <h2 class="statement" id="standard-title" data-reveal>
-            {{ t.standard.statement_before | escape }} <em class="gilt">{{ t.standard.statement_accent | escape }}</em> {{ t.standard.statement_after | escape }}
+      <!-- Principles. Not numbered: they are not a sequence. -->
+      <section class="chapter section" data-theme="dark" aria-labelledby="standard-title">
+        <div class="wrap chapter-inner">
+          <p class="note">{{ t.standard.label | escape }}</p>
+          <h2 class="statement" id="standard-title">
+            {{ t.standard.statement_before | escape }} <span class="gilt">{{ t.standard.statement_accent | escape }}</span> {{ t.standard.statement_after | escape }}
           </h2>
           <ul class="principles">
 {%- for p in t.standard.principles %}
-            <li class="principle" data-reveal{% if forloop.index0 > 0 %} data-reveal-delay="{{ forloop.index0 | times: 100 }}"{% endif %}>
-              <span class="numeral" aria-hidden="true">{{ upper[forloop.index0] }}</span>
+            <li class="principle">
               <h3>{{ p.title | escape }}</h3>
               <p>{{ p.text | escape }}</p>
             </li>
@@ -208,26 +245,23 @@
         </div>
       </section>
 
-      <!-- Menu targets (id="services" and the rest) sit on each section's .wrap,
-           not on the <section>: the section's top padding is breathing room,
-           and landing on it put 150-200px of empty band under the header. -->
-      <!-- Services: an editorial index; every row leads to the enquiry. -->
-      <section class="section" aria-labelledby="services-title">
-        <div class="wrap" id="services">
-          <div class="section-head section-head--split">
+      <!-- Menu targets (id="services" and the rest) sit on each chapter's
+           .wrap, not on the <section>: the section's top padding is breathing
+           room, and landing on it put an empty band under the header. -->
+      <!-- Services: an index; every row leads to the enquiry. -->
+      <section class="chapter section" data-theme="light" aria-labelledby="services-title">
+        <div class="wrap chapter-inner" id="services">
+          <div class="head head--split">
             <div>
-              <p class="label label--rule" data-reveal>{{ t.services.label | escape }}</p>
-              <h2 class="section-title" id="services-title" data-reveal>
-                {{ t.services.title | escape }} <em class="gilt">{{ t.services.title_accent | escape }}</em>
-              </h2>
+              <p class="note">{{ t.services.label | escape }}</p>
+              <h2 class="title" id="services-title">{{ t.services.title | escape }} <span class="gilt">{{ t.services.title_accent | escape }}</span></h2>
             </div>
-            <p class="lede" data-reveal>{{ t.services.lede | escape }}</p>
+            <p class="lede">{{ t.services.lede | escape }}</p>
           </div>
 
           <div class="index-list">
 {%- for s in t.services.items %}
-            <a class="index-row" href="#contact" data-reveal>
-              <span class="index-no" aria-hidden="true">{{ lower[forloop.index0] }}</span>
+            <a class="index-row" href="#contact">
               <h3>{{ s.title | escape }}</h3>
               <p>{{ s.text | escape }}</p>
               <span class="index-go" aria-hidden="true">{{ t.services.go | escape }}</span>
@@ -238,59 +272,58 @@
       </section>
 
       <!-- Recent work: only what is live and can be checked. -->
-      <section class="section section--alt" aria-labelledby="work-title">
-        <div class="wrap" id="work">
-          <div class="section-head">
-            <p class="label label--rule" data-reveal>{{ t.work.label | escape }}</p>
-            <h2 class="section-title" id="work-title" data-reveal>
-              {{ t.work.title | escape }} <em class="gilt">{{ t.work.title_accent | escape }}</em>
-            </h2>
+      <section class="chapter section" data-theme="dark" aria-labelledby="work-title">
+        <div class="wrap chapter-inner" id="work">
+          <div class="head">
+            <p class="note">{{ t.work.label | escape }}</p>
+            <h2 class="title" id="work-title">{{ t.work.title | escape }} <span class="gilt">{{ t.work.title_accent | escape }}</span></h2>
           </div>
 
           <article class="work">
-            <a class="frame" href="{{ t.work.url | escape }}" rel="noopener" data-reveal aria-label="{{ t.work.visit_label | escape }}">
-              <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>{{ t.work.address | escape }}</span></div>
-              <img
-                src="{{ t.work.image | escape }}?v={{ site.asset_version }}"
-                alt="{{ t.work.image_alt | escape }}"
-                width="1440"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
-            </a>
-            <div class="work-body" data-reveal data-reveal-delay="120">
-              <span class="tag">{{ t.work.tag | escape }}</span>
+            <div class="frame-stage">
+              <a class="frame" href="{{ t.work.url | escape }}" rel="noopener" aria-label="{{ t.work.visit_label | escape }}">
+                <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>{{ t.work.address | escape }}</span></div>
+                <img
+                  src="{{ t.work.image | escape }}?v={{ v }}"
+                  alt="{{ t.work.image_alt | escape }}"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+            </div>
+            <div class="work-body">
+              <p class="tag">{{ t.work.tag | escape }}</p>
               <h3>{{ t.work.name | escape }}</h3>
               <p>{{ t.work.text | escape }}</p>
-              <ul class="facts">
+              <dl class="facts">
 {%- for f in t.work.facts %}
-                <li><b>{{ f.label | escape }}</b><span>{{ f.value | escape }}</span></li>
+                <div><dt>{{ f.label | escape }}</dt><dd>{{ f.value | escape }}</dd></div>
 {%- endfor %}
-              </ul>
+              </dl>
               <a class="arrow-link" href="{{ t.work.url | escape }}" rel="noopener">{{ t.work.cta | escape }}</a>
             </div>
           </article>
         </div>
       </section>
 
-      <!-- Process -->
-      <section class="section" aria-labelledby="process-title">
-        <div class="wrap" id="process">
-          <div class="section-head section-head--split">
+      <!-- Process: a real sequence, so it is numbered. The rule between the
+           steps fills as the chapter scrolls past (assets/stage.js). -->
+      <section class="chapter section" data-theme="light" aria-labelledby="process-title" data-progress>
+        <div class="wrap chapter-inner" id="process">
+          <div class="head head--split">
             <div>
-              <p class="label label--rule" data-reveal>{{ t.process.label | escape }}</p>
-              <h2 class="section-title" id="process-title" data-reveal>
-                {{ t.process.title | escape }} <em class="gilt">{{ t.process.title_accent | escape }}</em>
-              </h2>
+              <p class="note">{{ t.process.label | escape }}</p>
+              <h2 class="title" id="process-title">{{ t.process.title | escape }} <span class="gilt">{{ t.process.title_accent | escape }}</span></h2>
             </div>
-            <p class="lede" data-reveal>{{ t.process.lede | escape }}</p>
+            <p class="lede">{{ t.process.lede | escape }}</p>
           </div>
 
           <ol class="steps">
 {%- for s in t.process.steps %}
-            <li class="step" data-reveal{% if forloop.index0 > 0 %} data-reveal-delay="{{ forloop.index0 | times: 120 }}"{% endif %}>
-              <span class="step-no" aria-hidden="true">{{ plain[forloop.index0] }}</span>
+            <li class="step">
+              <span class="step-no" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
               <h3>{{ s.title | escape }}</h3>
               <p>{{ s.text | escape }}</p>
             </li>
@@ -300,23 +333,21 @@
       </section>
 
       <!-- Engagements: shapes, not prices. See README "Pricing". -->
-      <section class="section section--alt" aria-labelledby="engagements-title">
-        <div class="wrap" id="engagements">
-          <div class="section-head section-head--split">
+      <section class="chapter section" data-theme="dark" aria-labelledby="engagements-title">
+        <div class="wrap chapter-inner" id="engagements">
+          <div class="head head--split">
             <div>
-              <p class="label label--rule" data-reveal>{{ t.engagements.label | escape }}</p>
-              <h2 class="section-title" id="engagements-title" data-reveal>
-                {{ t.engagements.title | escape }} <em class="gilt">{{ t.engagements.title_accent | escape }}</em>
-              </h2>
+              <p class="note">{{ t.engagements.label | escape }}</p>
+              <h2 class="title" id="engagements-title">{{ t.engagements.title | escape }} <span class="gilt">{{ t.engagements.title_accent | escape }}</span></h2>
             </div>
-            <p class="lede" data-reveal>{{ t.engagements.lede | escape }}</p>
+            <p class="lede">{{ t.engagements.lede | escape }}</p>
           </div>
 
           <div class="tiers">
 {%- for tier in t.engagements.tiers %}
-            <article class="tier{% if tier.flag != "" %} tier--featured{% endif %}" data-reveal{% if forloop.index0 > 0 %} data-reveal-delay="{{ forloop.index0 | times: 120 }}"{% endif %}>
+            <article class="tier{% if tier.flag != "" %} tier--featured{% endif %}">
 {%- if tier.flag != "" %}
-              <span class="tier-flag">{{ tier.flag | escape }}</span>
+              <p class="tier-flag">{{ tier.flag | escape }}</p>
 {%- endif %}
               <h3>{{ tier.name | escape }}</h3>
               <p class="tier-price">{{ tier.price | escape }} <small>{{ tier.price_note | escape }}</small></p>
@@ -325,25 +356,23 @@
                 <li>{{ point | escape }}</li>
 {%- endfor %}
               </ul>
-              <a class="btn{% if tier.flag != "" %} btn--gold{% endif %} btn--sm" href="#contact">{{ t.engagements.cta | escape }}</a>
+              <a class="btn{% if tier.flag != "" %} btn--primary{% endif %} btn--sm" href="#contact">{{ t.engagements.cta | escape }}</a>
             </article>
 {%- endfor %}
           </div>
-          <p class="tiers-note" data-reveal>{{ t.engagements.note | escape }}</p>
+          <p class="tiers-note">{{ t.engagements.note | escape }}</p>
         </div>
       </section>
 
       <!-- FAQ -->
-      <section class="section" aria-labelledby="faq-title">
-        <div class="wrap faq-grid" id="faq">
-          <div class="section-head">
-            <p class="label label--rule" data-reveal>{{ t.faq.label | escape }}</p>
-            <h2 class="section-title" id="faq-title" data-reveal>
-              {{ t.faq.title | escape }} <em class="gilt">{{ t.faq.title_accent | escape }}</em>
-            </h2>
+      <section class="chapter section" data-theme="light" aria-labelledby="faq-title">
+        <div class="wrap chapter-inner faq-grid" id="faq">
+          <div class="head">
+            <p class="note">{{ t.faq.label | escape }}</p>
+            <h2 class="title" id="faq-title">{{ t.faq.title | escape }} <span class="gilt">{{ t.faq.title_accent | escape }}</span></h2>
           </div>
 
-          <div class="faq" data-reveal>
+          <div class="faq">
 {%- for item in t.faq.items %}
             <details>
               <summary>{{ item.question | escape }}<span class="faq-sign" aria-hidden="true"></span></summary>
@@ -355,73 +384,86 @@
       </section>
 
       <!-- Closing call to action: the brief builder (assets/brief.js). -->
-      <section class="closing" aria-labelledby="contact-title">
-        <div class="wrap" id="contact">
-          <p class="label" data-reveal>{{ t.contact.label | escape }}</p>
-          <h2 id="contact-title" data-reveal>{{ t.contact.title | escape }} <em class="gilt">{{ t.contact.title_accent | escape }}</em></h2>
-          <p class="lede" data-reveal>{{ t.contact.lede | escape }}</p>
+      <section class="chapter section closing" data-theme="dark" aria-labelledby="contact-title">
+        <div class="wrap chapter-inner" id="contact">
+          <div class="head head--split">
+            <div>
+              <p class="note">{{ t.contact.label | escape }}</p>
+              <h2 class="title" id="contact-title">{{ t.contact.title | escape }} <span class="gilt">{{ t.contact.title_accent | escape }}</span></h2>
+            </div>
+            <p class="lede">{{ t.contact.lede | escape }}</p>
+          </div>
 
-          <form
-            class="brief"
-            id="brief"
-            action="https://wa.me/{{ c.whatsapp }}"
-            method="get"
-            target="_blank"
-            novalidate
-            data-reveal
-            data-phone="{{ c.whatsapp }}"
-            data-email="{{ c.email | escape }}"
-            data-greeting="{{ t.contact.message_greeting | escape }}"
-            data-l-kind="{{ t.contact.message_kind | escape }}"
-            data-l-when="{{ t.contact.message_when | escape }}"
-            data-l-name="{{ t.contact.message_name | escape }}"
-            data-signature="{{ t.contact.message_signature | escape }}"
-            data-subject="{{ t.contact.email_subject | escape }}"
-          >
-            <fieldset>
-              <legend>{{ t.contact.kind_question | escape }}</legend>
-              <div class="chips">
+          <div class="brief-grid">
+            <form
+              class="brief"
+              id="brief"
+              action="https://wa.me/{{ c.whatsapp }}"
+              method="get"
+              target="_blank"
+              novalidate
+              data-phone="{{ c.whatsapp }}"
+              data-email="{{ c.email | escape }}"
+              data-greeting="{{ t.contact.message_greeting | escape }}"
+              data-l-kind="{{ t.contact.message_kind | escape }}"
+              data-l-when="{{ t.contact.message_when | escape }}"
+              data-l-name="{{ t.contact.message_name | escape }}"
+              data-signature="{{ t.contact.message_signature | escape }}"
+              data-subject="{{ t.contact.email_subject | escape }}"
+            >
+              <fieldset>
+                <legend>{{ t.contact.kind_question | escape }}</legend>
+                <div class="chips">
 {%- for k in t.contact.kinds %}
-                <label class="chip"><input type="radio" name="kind" value="{{ k | escape }}"{% if forloop.index == t.contact.kind_preselected %} checked{% endif %} /><span>{{ k | escape }}</span></label>
+                  <label class="chip"><input type="radio" name="kind" value="{{ k | escape }}"{% if forloop.index == t.contact.kind_preselected %} checked{% endif %} /><span>{{ k | escape }}</span></label>
 {%- endfor %}
-              </div>
-            </fieldset>
+                </div>
+              </fieldset>
 
-            <fieldset>
-              <legend>{{ t.contact.when_question | escape }}</legend>
-              <div class="chips">
+              <fieldset>
+                <legend>{{ t.contact.when_question | escape }}</legend>
+                <div class="chips">
 {%- for w in t.contact.whens %}
-                <label class="chip"><input type="radio" name="when" value="{{ w | escape }}"{% if forloop.index == t.contact.when_preselected %} checked{% endif %} /><span>{{ w | escape }}</span></label>
+                  <label class="chip"><input type="radio" name="when" value="{{ w | escape }}"{% if forloop.index == t.contact.when_preselected %} checked{% endif %} /><span>{{ w | escape }}</span></label>
 {%- endfor %}
+                </div>
+              </fieldset>
+
+              <div class="brief-field">
+                <label for="brief-name">{{ t.contact.name_label | escape }} <span>{{ t.contact.name_optional | escape }}</span></label>
+                <input id="brief-name" name="name" type="text" autocomplete="name" />
               </div>
-            </fieldset>
 
-            <div class="brief-field">
-              <label for="brief-name">{{ t.contact.name_label | escape }} <span>{{ t.contact.name_optional | escape }}</span></label>
-              <input id="brief-name" name="name" type="text" autocomplete="name" />
-            </div>
+              <div class="brief-field">
+                <label for="brief-text">{{ t.contact.text_label | escape }}</label>
+                <textarea id="brief-text" name="text" rows="4" required aria-describedby="brief-help brief-error"></textarea>
+                <p class="brief-help" id="brief-help">{{ t.contact.text_help | escape }}</p>
+                <p class="brief-error" id="brief-error" role="alert" hidden>{{ t.contact.text_error | escape }}</p>
+              </div>
 
-            <div class="brief-field">
-              <label for="brief-text">{{ t.contact.text_label | escape }}</label>
-              <textarea id="brief-text" name="text" rows="4" required aria-describedby="brief-help brief-error"></textarea>
-              <p class="brief-help" id="brief-help">{{ t.contact.text_help | escape }}</p>
-              <p class="brief-error" id="brief-error" role="alert" hidden>{{ t.contact.text_error | escape }}</p>
-            </div>
+              <div class="brief-actions">
+                <button class="btn btn--primary" type="submit" data-send="whatsapp">{{ t.contact.send_whatsapp | escape }}</button>
+                <button
+                  class="btn"
+                  type="submit"
+                  data-send="email"
+                  formaction="mailto:{{ c.email | escape }}"
+                  formmethod="post"
+                  formenctype="text/plain"
+                >{{ t.contact.send_email | escape }}</button>
+              </div>
+            </form>
 
-            <div class="brief-actions">
-              <button class="btn btn--gold" type="submit" data-send="whatsapp">{{ t.contact.send_whatsapp | escape }}</button>
-              <button
-                class="btn"
-                type="submit"
-                data-send="email"
-                formaction="mailto:{{ c.email | escape }}"
-                formmethod="post"
-                formenctype="text/plain"
-              >{{ t.contact.send_email | escape }}</button>
-            </div>
-          </form>
+            <!-- The message exactly as it will arrive, rebuilt as the visitor
+                 types (assets/brief.js). It repeats the form, so screen
+                 readers skip it; without JavaScript it stays hidden. -->
+            <figure class="preview" aria-hidden="true" hidden>
+              <figcaption><i></i><i></i><i></i><span>{{ t.contact.preview_label | escape }}</span></figcaption>
+              <pre class="preview-text"></pre>
+            </figure>
+          </div>
 
-          <ul class="direct" data-reveal>
+          <ul class="direct">
             <li><a href="https://wa.me/{{ c.whatsapp }}" rel="noopener"><b>{{ t.contact.whatsapp | escape }}</b> {{ c.whatsapp_display | escape }}</a></li>
             <li><a href="{{ c.discord | escape }}" rel="noopener"><b>{{ t.contact.discord | escape }}</b> {{ t.contact.discord_value | escape }}</a></li>
             <li><a href="mailto:{{ c.email | escape }}"><b>{{ t.contact.email | escape }}</b> {{ c.email | escape }}</a></li>
@@ -430,12 +472,12 @@
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" data-theme="light">
       <div class="wrap">
         <div class="footer-top">
           <div>
             <a class="brand" href="{{ here.path }}">
-              <img src="/assets/logo-mark-192.webp?v={{ site.asset_version }}" alt="" width="44" height="44" />
+              <img src="/assets/mark.webp?v={{ v }}" alt="" width="556" height="488" loading="lazy" />
               <span class="brand-text">
                 <span class="brand-name">AmziXz</span>
                 <span class="brand-sub">Services</span>
@@ -450,6 +492,7 @@
             <li><a href="mailto:{{ c.email | escape }}">{{ t.footer.email | escape }}</a></li>
           </ul>
         </div>
+        <p class="wordmark" aria-hidden="true">AmziXz</p>
         <div class="footer-bottom">
           <p>&copy; <span id="year">2026</span> AmziXz</p>
           <p>{{ t.footer.place | escape }}</p>
