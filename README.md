@@ -36,7 +36,8 @@ Rules that keep it working:
 - Keep the indentation (the spaces at the start of the line) exactly as it is.
 - Both files have the same keys. Add or remove a line in one, do the same in
   the other.
-- `_accent` texts are the gold italic end of a heading.
+- `_accent` texts are the gold end of a heading. In the hero it is the
+  second line of the headline.
 
 **If you break it**, the site does not break. The build refuses the change,
 the previous version stays live, and GitHub emails you that the Pages build
@@ -159,17 +160,19 @@ check.js              Translation checker (npm run check)
 package.json          Local tooling only: never served
 design-system/        Design decisions and where they came from (not served)
 assets/
-  style.css           Tokens, @font-face, components. One theme: black and gold
-  reveal.js           Scroll reveals
+  style.css           Tokens (light and dark), @font-face, components
+  stage.js            Chapters sliding over each other, the turning monogram,
+                      rulers, headline fitting, header theme (see Design)
   menu.js             Phone navigation menu and the language menu
   lang.js             Remembers the language; copy of the main site's. Synchronous in <head>
-  brief.js            The project brief builder (see Enquiries)
-  fonts/              Cormorant (display, roman + italic) + Montserrat (body), latin + latin-ext
+  brief.js            The project brief builder and its live preview (see Enquiries)
+  fonts/              Mona Sans (variable: weight + width) + JetBrains Mono,
+                      latin + latin-ext, with their OFL licences
   work-amzixz.webp    Screenshot of amzixz.id.lv for Recent work (EN)
   work-amzixz-lv.webp The same for amzixz.id.lv/lv/ (LV)
   logo-full.jpg       Brand master. Every icon below is cut from this.
-  logo-mark.webp      512px monogram, hero (13 KB; the PNG is 90 KB)
-  logo-mark-192.webp  Header and footer mark
+  mark.webp           The AX monogram cut out with real transparency (31 KB):
+                      hero, header and footer
   logo-mark.png       512px monogram, used in structured data
   logo-mark-192.png   Favicon and apple-touch-icon
   logo-mark-32.png    Favicon
@@ -183,11 +186,15 @@ The design system is in
 the ui-ux-pro-max queries it came from, the tokens, and which of the tool's
 suggestions were overridden and why. Read it before changing a colour.
 
-Short version: exaggerated minimalism in black and gold. Oversized Cormorant
-display type, Montserrat body text, hairline rules, square corners, a lot of
-space. The page background is the logo's own black (`#11100e`), and the logo
-images are blended so only the gold shows. Don't change `--bg`, and don't
-put a logo on a translucent background (MASTER.md, "The logo trick").
+Short version (version 3, after the owner's references Noomo and the
+Citrix / Red Bull Racing site): the page is a run of full-screen chapters,
+alternating light periwinkle and near-black, and each one slides over the last
+as you scroll. The first screen is light, with one huge expanded headline
+across the width and the gold AX monogram as a solid 3D object behind it that
+turns and drifts with the mouse; rulers and an x/y readout measure the pointer
+("made to measure"). One type family, Mona Sans, with its width axis doing the
+work; JetBrains Mono only for code-like details. Square corners, hairlines,
+gold as the one accent.
 
 ## Cache busting
 
@@ -197,22 +204,31 @@ stylesheets and images longer still, so an edited `style.css` without a new
 number leaves returning visitors on the old copy.
 
 **After changing anything in `/assets`, add one to `asset_version`.** Every
-page follows. Currently `5`.
+page follows. Currently `6`.
 
 ## Conventions
 
 Mostly the same as the main site, for the same reasons:
 
 - **Design tokens** are CSS custom properties in `:root`. Change colours there.
-- **One theme.** There is no light palette and no toggle. Every text colour
-  was measured against `--bg`, `--bg-2` and `--surface`; measure any new one.
+- **Two themes, set per chapter** with `data-theme="light"` or `"dark"` on the
+  section. There is no visitor toggle: the page alternates on purpose. Every
+  colour is a token defined for both themes; a component that uses the tokens
+  works on either. Every text colour was measured against its theme's `--bg`
+  and `--surface`; measure any new one (the numbers are in `style.css`).
 - **Accessibility**: skip link, `:focus-visible` ring, touch targets of at
   least 44px (48px where a reveal animation could round one down), decorative
   SVGs `aria-hidden`, one `h1`, sections labelled by their headings.
 - **Motion** uses the `--ease` / `--dur-*` variables, only animates
-  `opacity` and `transform`, and is disabled under `prefers-reduced-motion`.
-  Hover effects are gated behind `@media (hover: hover) and (pointer: fine)` so
-  they don't stick on touch.
+  `opacity` and `transform`, and is disabled under `prefers-reduced-motion`
+  (then `stage.js` does nothing but mark the current chapter). Hover effects
+  are gated behind `@media (hover: hover) and (pointer: fine)` so they don't
+  stick on touch. The chapter stacking only runs at 60rem wide and up; phones
+  scroll normally and the monogram turns on its own.
+- **The chapters never move the layout.** `stage.js` only sets `transform`
+  and `opacity` on each chapter's `.chapter-inner`, and a chapter only starts
+  to sink once the next one covers its bottom quarter, so a menu jump always
+  finds its chapter still.
 - **The phone menu breakpoint (900px) lives in two places**: `style.css` and
   `assets/menu.js`. Change both. The template also has a `<noscript>` style
   that shows the links inline when the menu button cannot work.
@@ -228,8 +244,8 @@ Mostly the same as the main site, for the same reasons:
 
 ## Shared with the main site, copied not linked
 
-`reveal.js`, `lang.js` and the core of `menu.js` and `serve.js` are copies of
-the main site's. Loading them cross-origin would add a connection to first
+`lang.js` and the core of `menu.js` and `serve.js` are copies of the main
+site's. Loading them cross-origin would add a connection to first
 paint and break this site whenever the other one moved a file. The cost is
 drift: if you fix a bug in one, fix it in the other.
 
@@ -243,6 +259,9 @@ timeline, optional name and a description, sent as a ready-written message.
   server or a third party.
 - All wording comes from `data-` attributes on the `<form>`, filled from the
   translation files, so a translation never touches the script.
+- Beside the form, a preview shows the message exactly as it will arrive,
+  rebuilt as the visitor types. It is `aria-hidden` (it repeats the form) and
+  stays hidden without JavaScript.
 - Without JavaScript it still works: the form is a GET to `wa.me` with the
   textarea named `text` (the parameter WhatsApp prefills). Never name a field
   `type`, because wa.me uses that itself.

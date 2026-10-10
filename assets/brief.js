@@ -51,6 +51,22 @@
     if (!error.hidden && text.value.trim().length >= 10) showError(false);
   });
 
+  /* The preview beside the form shows the message exactly as it will arrive,
+     rebuilt on every change. It repeats what the form already says, so it is
+     aria-hidden; it starts hidden so that without this script it never shows
+     up empty. */
+  var preview = document.querySelector(".preview");
+  var previewText = preview && preview.querySelector(".preview-text");
+  if (previewText) {
+    var renderPreview = function () {
+      previewText.textContent = compose();
+    };
+    form.addEventListener("input", renderPreview);
+    form.addEventListener("change", renderPreview);
+    renderPreview();
+    preview.hidden = false;
+  }
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 

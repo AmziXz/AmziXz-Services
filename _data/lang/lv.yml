@@ -9,7 +9,7 @@
 #   - Katram tekstam jāpaliek pēdiņās "…".
 #   - Ja tekstā vajag pēdiņas, lietojiet latviešu „šādas”.
 #   - Rindas, kas sākas ar #, ir piezīmes kā šī. Lapā tās neparādās.
-#   - "_accent" teksti ir virsraksta zeltītās slīprakstā beigas.
+#   - "_accent" teksti ir virsraksta zeltītās beigas.
 #   - en.yml ir tieši tādas pašas atslēgas. Ja šeit pievienojat vai dzēšat
 #     rindu, dariet to pašu tur.
 #
@@ -36,6 +36,8 @@ ui:
   language: "Valoda"
   menu: "Izvēlne"
   enquire: "Sazināties"
+  # Mazais mājiens pirmā ekrāna apakšā
+  scroll: "Ritināt"
 
 nav:
   services: "Pakalpojumi"
@@ -63,7 +65,7 @@ standard:
   statement_before: "Katrs projekts sākas ar"
   statement_accent: "fiksētu cenu"
   statement_after: "un beidzas ar to, ka katra koda rinda pieder Jums."
-  # Rādās kā I. II. III. IV. šādā secībā
+  # Rādās šādā secībā, no kreisās uz labo
   principles:
     - title: "Fiksēta cena"
       text: "Apjoms, cena un termiņš, par kuriem vienojamies pirms darba sākuma."
@@ -118,7 +120,7 @@ process:
   title: "Kā norit"
   title_accent: "projekts."
   lede: "Bez pārdošanas zvaniem un liekiem papīriem. Lai sāktu, pietiek ar vienu ziņu."
-  # Rādās kā I, II, III šādā secībā
+  # Rādās kā 01, 02, 03 šādā secībā
   steps:
     - title: "Saruna"
       text: "Uzrakstiet mums WhatsApp, Discord vai e-pastā, ko veidojat, aptuveni kad tas nepieciešams, un piemērus, kas Jums patīk."
@@ -212,6 +214,8 @@ contact:
   message_name: "Vārds"
   message_signature: "(nosūtīts no services.amzixz.id.lv)"
   email_subject: "Projekta pieteikums"
+  # Ziņas priekšskatījuma virsraksts blakus formai
+  preview_label: "Jūsu ziņa"
   # Trīs tiešie kontakti zem formas
   whatsapp: "WhatsApp"
   discord: "Discord"
