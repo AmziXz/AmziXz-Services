@@ -54,12 +54,14 @@ npm run check   # translation files: same keys, same list lengths
 
 ## Before you commit
 
+- The name is always written **AmziXz**: never "AMZIXZ" or "amzixz" on the
+  page, so never put `text-transform: uppercase` on anything that shows it.
 - Anything committed here is **public**. `.claude/` and `node_modules/` are
   gitignored for that reason. `_config.yml` keeps the notes and local tooling
   (`package.json`, `serve.js`, `check.js`) from being published; add any new
   tooling file to its `exclude` list.
 - After changing anything in `/assets`, add one to `asset_version` in
-  `_config.yml`. Every page follows. Currently `7`.
+  `_config.yml`. Every page follows. Currently `8`.
 - Run `npm run check`, and build once with real Jekyll if you changed the
   template: the preview matches it, but GitHub is the one that publishes.
 - The page has two themes, set per chapter with `data-theme`. New text

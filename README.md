@@ -204,7 +204,7 @@ stylesheets and images longer still, so an edited `style.css` without a new
 number leaves returning visitors on the old copy.
 
 **After changing anything in `/assets`, add one to `asset_version`.** Every
-page follows. Currently `7`.
+page follows. Currently `8`.
 
 ## Conventions
 
